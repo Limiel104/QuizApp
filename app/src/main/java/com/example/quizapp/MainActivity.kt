@@ -53,7 +53,6 @@ fun DefaultPreview() {
 
 @Composable
 fun CategoryListScreen() {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -189,8 +188,22 @@ fun ChooseDifficultyScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(LightGray3),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly
     ) {
+        Text(
+            text = label,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 25.dp),
+            color = OffBlack,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
+            fontSize = 30.sp
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
         Image(
             painterResource(
                 id = categoryImageId
@@ -200,21 +213,23 @@ fun ChooseDifficultyScreen(
 
         Spacer(modifier = Modifier.height(5.dp))
 
-        Text(
-            text = "Choose difficulty level",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 25.dp),
-            color = Color.Gray,
-            textAlign = TextAlign.Start,
-            fontWeight = FontWeight.SemiBold
-        )
+        Column() {
+            Text(
+                text = "Choose difficulty level",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 25.dp),
+                color = Color.Gray,
+                textAlign = TextAlign.Start,
+                fontWeight = FontWeight.SemiBold
+            )
 
-        Spacer(modifier = Modifier.height(5.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
-        DifficultyButton(text = "Easy")
-        DifficultyButton(text = "Medium")
-        DifficultyButton(text = "Hard")
+            DifficultyButton(text = "Easy")
+            DifficultyButton(text = "Medium")
+            DifficultyButton(text = "Hard")
+        }
     }
 }
 
@@ -228,7 +243,7 @@ fun DifficultyButton(
             .fillMaxWidth()
             .padding(
                 horizontal = 25.dp,
-                vertical = 5.dp
+                vertical = 9.dp
             ),
         border = BorderStroke(1.dp, OffBlack),
         shape = RoundedCornerShape(35.dp),
