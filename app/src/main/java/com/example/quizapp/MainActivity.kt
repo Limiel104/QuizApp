@@ -10,8 +10,13 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PaintingStyle.Companion.Stroke
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,11 +33,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    //CategoryListScreen()
-                    ChooseDifficultyScreen(
-                        categoryImageId = R.drawable.food_big,
-                        label = "Food & Drinks"
-                    )
+//                    CategoryListScreen()
+//                    ChooseDifficultyScreen(
+//                        categoryImageId = R.drawable.food_big,
+//                        label = "Food & Drinks"
+//                    )
+                    QuestionsScreen()
                 }
             }
         }
@@ -43,11 +49,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     QuizAppTheme {
-        //CategoryListScreen()
-        ChooseDifficultyScreen(
-            categoryImageId = R.drawable.food_big,
-            label = "Food & Drinks"
-        )
+//        CategoryListScreen()
+//        ChooseDifficultyScreen(
+//            categoryImageId = R.drawable.food_big,
+//            label = "Food & Drinks"
+//        )
+        QuestionsScreen()
     }
 }
 
@@ -254,6 +261,145 @@ fun DifficultyButton(
             color = OffBlack,
             modifier = Modifier
                 .padding(7.dp)
+        )
+    }
+}
+
+@Composable
+fun QuestionsScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+    ) {
+        Timer(
+            time = "4:37"
+        )
+
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceEvenly
+        ) {
+            QuestionTitle(
+                number = "Question 1",
+                question = "What Word Is Used To Describe Bell Shaped Flowers?"
+            )
+
+            Column() {
+                QuestionButton(
+                    text = "Campanulate",
+                    color = Green
+                )
+
+                QuestionButton(
+                    text = "Clochical",
+                    color = OffBlack
+                )
+
+                QuestionButton(
+                    text = "Cambarn",
+                    color = Red
+                )
+
+                QuestionButton(
+                    text = "Belieux",
+                    color = OffBlack
+                )
+            }
+        }
+
+
+    }
+}
+
+@Composable
+fun Timer(
+    time: String
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.End
+    ) {
+        Box(
+            contentAlignment = Alignment.Center
+        ) {
+            Canvas(
+                modifier = Modifier
+                    .padding(5.dp)
+                    .size(70.dp)
+            ) {
+                drawCircle(
+                    color = Color.LightGray,
+                    radius = 50f,
+                    style = Stroke(
+                        width = 4f,
+                        cap = StrokeCap.Round
+                    )
+                )
+            }
+
+            Text(
+                text = time,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+        }
+    }
+}
+
+@Composable
+fun QuestionButton(
+    text: String,
+    color: Color
+) {
+    OutlinedButton(
+        colors = ButtonDefaults.buttonColors(Color.White),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = 25.dp,
+                vertical = 9.dp
+            ),
+        border = BorderStroke(1.dp, color),
+        shape = RoundedCornerShape(35.dp),
+        onClick = { /*TODO*/ }
+    ) {
+        Text(
+            text = text,
+            color = color,
+            modifier = Modifier
+                .padding(7.dp)
+        )
+    }
+}
+
+@Composable
+fun QuestionTitle(
+    number: String,
+    question: String
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        Text(
+            text = number,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 25.dp),
+            color = Color.Gray,
+            textAlign = TextAlign.Start,
+            fontWeight = FontWeight.SemiBold
+        )
+        
+        Text(
+            text = question,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(25.dp, 12.dp),
+            textAlign = TextAlign.Start,
+            fontSize = 22.sp,
+            fontWeight = FontWeight.SemiBold
         )
     }
 }
