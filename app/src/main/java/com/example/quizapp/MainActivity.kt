@@ -38,7 +38,8 @@ class MainActivity : ComponentActivity() {
 //                        categoryImageId = R.drawable.food_big,
 //                        label = "Food & Drinks"
 //                    )
-                    QuestionsScreen()
+//                    QuestionsScreen()
+                    ResultsScreen()
                 }
             }
         }
@@ -54,7 +55,8 @@ fun DefaultPreview() {
 //            categoryImageId = R.drawable.food_big,
 //            label = "Food & Drinks"
 //        )
-        QuestionsScreen()
+//        QuestionsScreen()
+        ResultsScreen()
     }
 }
 
@@ -269,7 +271,8 @@ fun DifficultyButton(
 fun QuestionsScreen() {
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(LightGray3),
     ) {
         Timer(
             time = "4:37"
@@ -306,8 +309,6 @@ fun QuestionsScreen() {
                 )
             }
         }
-
-
     }
 }
 
@@ -391,7 +392,7 @@ fun QuestionTitle(
             textAlign = TextAlign.Start,
             fontWeight = FontWeight.SemiBold
         )
-        
+
         Text(
             text = question,
             modifier = Modifier
@@ -401,5 +402,162 @@ fun QuestionTitle(
             fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold
         )
+    }
+}
+
+@Composable
+fun ResultsScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(LightGray3),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Quiz Result",
+            modifier = Modifier
+                .fillMaxWidth(),
+            color = OffBlack,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
+            fontSize = 30.sp
+        )
+
+        Text(
+            text = "Accuracy: 89,9%",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp),
+            color = OffBlack,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 24.sp
+        )
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            ResultCard(
+                result = "16",
+                title = "Correct",
+                resultColor = Green
+            )
+
+            ResultCard(
+                result = "4",
+                title = "Incorrect",
+                resultColor = Red
+            )
+        }
+
+        ResultRating(
+            rating = "Very Good",
+            color = Green
+        )
+
+        OutlinedButton(
+            colors = ButtonDefaults.buttonColors(Color.White),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = 25.dp,
+                    vertical = 9.dp
+                ),
+            border = BorderStroke(1.dp, OffBlack),
+            shape = RoundedCornerShape(35.dp),
+            onClick = { /*TODO*/ }
+        ) {
+            Text(
+                text = "Go Back",
+                color = OffBlack,
+                modifier = Modifier
+                    .padding(7.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun ResultCard(
+    result: String,
+    title: String,
+    resultColor: Color
+) {
+    Card(
+        modifier = Modifier
+            .size(100.dp)
+            .background(Color.White)
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = result,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.body1,
+                fontSize = 26.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = resultColor
+            )
+
+            Text(
+                text = title,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.body1,
+                fontSize = 20.sp,
+                color = resultColor
+            )
+        }
+    }
+}
+
+@Composable
+fun ResultRating(
+    rating: String,
+    color: Color
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Box(
+            contentAlignment = Alignment.Center
+        ) {
+            Canvas(
+                modifier = Modifier
+                    .padding(5.dp)
+                    .size(170.dp)
+            ) {
+                drawCircle(
+                    color = color,
+                    radius = 150f,
+                    style = Stroke(
+                        width = 7f,
+                        cap = StrokeCap.Round
+                    )
+                )
+
+                drawCircle(
+                    color = color,
+                    radius = 140f,
+                    style = Stroke(
+                        width = 5f,
+                        cap = StrokeCap.Round
+                    )
+                )
+            }
+
+            Text(
+                text = rating,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = color
+            )
+        }
     }
 }
