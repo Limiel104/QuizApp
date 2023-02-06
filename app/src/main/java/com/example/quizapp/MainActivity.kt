@@ -8,6 +8,8 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.quizapp.domain.use_case.GetQuestionsUseCase
+import com.example.quizapp.presentation.composable.CategoryListScreen
 import com.example.quizapp.presentation.composable.ResultsScreen
 import com.example.quizapp.ui.theme.*
 
@@ -20,13 +22,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-//                    CategoryListScreen()
+                    CategoryListScreen()
 //                    ChooseDifficultyScreen(
 //                        categoryImageId = R.drawable.food_big,
 //                        label = "Food & Drinks"
 //                    )
 //                    QuestionsScreen()
-                    ResultsScreen()
+//                    ResultsScreen()
+                    //val questions = GetQuestionsUseCase()
                 }
             }
         }
@@ -37,12 +40,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     QuizAppTheme {
-//        CategoryListScreen()
+        CategoryListScreen()
 //        ChooseDifficultyScreen(
 //            categoryImageId = R.drawable.food_big,
 //            label = "Food & Drinks"
 //        )
 //        QuestionsScreen()
-        ResultsScreen()
+//        ResultsScreen()
     }
 }
