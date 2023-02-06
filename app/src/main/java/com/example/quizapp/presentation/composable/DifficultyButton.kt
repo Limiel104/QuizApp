@@ -1,4 +1,4 @@
-package com.example.quizapp.composable
+package com.example.quizapp.presentation.composable
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,11 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.quizapp.ui.theme.OffBlack
 
 @Composable
-fun QuestionButton(
-    text: String,
-    color: Color
+fun DifficultyButton(
+    text: String
 ) {
     OutlinedButton(
         colors = ButtonDefaults.buttonColors(Color.White),
@@ -25,13 +25,13 @@ fun QuestionButton(
                 horizontal = 25.dp,
                 vertical = 9.dp
             ),
-        border = BorderStroke(1.dp, color),
+        border = BorderStroke(1.dp, OffBlack),
         shape = RoundedCornerShape(35.dp),
         onClick = { /*TODO*/ }
     ) {
         Text(
             text = text,
-            color = color,
+            color = OffBlack,
             modifier = Modifier
                 .padding(7.dp)
         )

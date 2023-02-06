@@ -1,4 +1,4 @@
-package com.example.quizapp.composable
+package com.example.quizapp.presentation.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

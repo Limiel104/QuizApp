@@ -1,4 +1,4 @@
-package com.example.quizapp.composable
+package com.example.quizapp.presentation.composable
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
@@ -14,13 +14,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Timer(
-    time: String
+fun ResultRating(
+    rating: String,
+    color: Color
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.End
+        horizontalArrangement = Arrangement.Center
     ) {
         Box(
             contentAlignment = Alignment.Center
@@ -28,22 +29,32 @@ fun Timer(
             Canvas(
                 modifier = Modifier
                     .padding(5.dp)
-                    .size(70.dp)
+                    .size(170.dp)
             ) {
                 drawCircle(
-                    color = Color.LightGray,
-                    radius = 50f,
+                    color = color,
+                    radius = 150f,
                     style = Stroke(
-                        width = 4f,
+                        width = 7f,
+                        cap = StrokeCap.Round
+                    )
+                )
+
+                drawCircle(
+                    color = color,
+                    radius = 140f,
+                    style = Stroke(
+                        width = 5f,
                         cap = StrokeCap.Round
                     )
                 )
             }
 
             Text(
-                text = time,
-                fontSize = 11.sp,
-                fontWeight = FontWeight.SemiBold
+                text = rating,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = color
             )
         }
     }
