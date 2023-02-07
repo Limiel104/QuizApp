@@ -10,4 +10,8 @@ import androidx.room.RoomDatabase
 abstract class QuizDatabase: RoomDatabase() {
 
     abstract val dao: QuizDao
+
+    companion object {
+        const val DATABASE_NAME = "quizdb.db"
+    }
 }

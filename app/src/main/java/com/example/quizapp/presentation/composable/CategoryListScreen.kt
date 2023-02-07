@@ -10,12 +10,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.quizapp.R
+import com.example.quizapp.presentation.QuestionsViewModel
 import com.example.quizapp.ui.theme.LightGray3
 import com.example.quizapp.ui.theme.OffBlack
 
 @Composable
-fun CategoryListScreen() {
+fun CategoryListScreen(
+    navController: NavController,
+    viewModel: QuestionsViewModel = hiltViewModel()
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
