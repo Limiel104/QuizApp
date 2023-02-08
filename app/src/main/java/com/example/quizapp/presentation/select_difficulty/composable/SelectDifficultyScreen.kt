@@ -1,4 +1,4 @@
-package com.example.quizapp.presentation.composable
+package com.example.quizapp.presentation.select_difficulty.composable
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,13 +13,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.quizapp.presentation.select_difficulty.SelectDifficultyViewModel
 import com.example.quizapp.ui.theme.LightGray3
 import com.example.quizapp.ui.theme.OffBlack
+import com.example.quizapp.util.Screen
 
 @Composable
-fun ChooseDifficultyScreen(
-    categoryImageId: Int,
-    label: String
+fun SelectDifficultyScreen(
+    navController: NavController,
+    viewModel: SelectDifficultyViewModel = hiltViewModel()
 ) {
     Column(
         modifier = Modifier
@@ -29,7 +33,7 @@ fun ChooseDifficultyScreen(
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Text(
-            text = label,
+            text = viewModel.state.value.label,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 25.dp),
@@ -43,9 +47,9 @@ fun ChooseDifficultyScreen(
 
         Image(
             painterResource(
-                id = categoryImageId
+                id = viewModel.state.value.iconId
             ),
-            contentDescription = label
+            contentDescription = viewModel.state.value.label
         )
 
         Spacer(modifier = Modifier.height(5.dp))
@@ -63,9 +67,38 @@ fun ChooseDifficultyScreen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            DifficultyButton(text = "Easy")
-            DifficultyButton(text = "Medium")
-            DifficultyButton(text = "Hard")
+            DifficultyButton(
+                text = "Easy",
+                onClick = {
+                    navController.navigate(
+                        Screen.QuestionsScreen.route
+                                + "category=${viewModel.state.value.selectedCategory}"
+                                + "&difficulty=easy"
+                    )
+                }
+            )
+
+            DifficultyButton(
+                text = "Medium",
+                onClick = {
+                    navController.navigate(
+                        Screen.QuestionsScreen.route
+                                + "category=${viewModel.state.value.selectedCategory}"
+                                + "&difficulty=medium"
+                    )
+                }
+            )
+
+            DifficultyButton(
+                text = "Hard",
+                onClick = {
+                    navController.navigate(
+                        Screen.QuestionsScreen.route
+                                + "category=${viewModel.state.value.selectedCategory}"
+                                + "&difficulty=hard"
+                    )
+                }
+            )
         }
     }
 }

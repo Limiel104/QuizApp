@@ -5,22 +5,22 @@ import com.example.quizapp.domain.model.Question
 
 fun QuestionEntity.toQuestion(): Question {
     return Question(
-        categoryId = categoryId,
+        category = category,
         correctAnswer = correctAnswer,
         incorrectAnswersList = listOf(incorrectAnswer1,incorrectAnswer2,incorrectAnswer3),
         question = question,
-        difficultyId = difficultyId
+        difficulty = difficulty
     )
 }
 
 fun Question.toQuestionEntity(): QuestionEntity {
     return QuestionEntity(
-        categoryId = categoryId,
+        category = category,
         correctAnswer = correctAnswer,
         incorrectAnswer1 = incorrectAnswersList[0],
         incorrectAnswer2 = incorrectAnswersList[1],
         incorrectAnswer3 = incorrectAnswersList[2],
         question = question,
-        difficultyId = difficultyId
+        difficulty = difficulty
     )
 }

@@ -12,11 +12,11 @@ class GetQuestionsUseCase @Inject constructor(
     private val quizRepository: QuizRepository
 ) {
     operator fun invoke(
-        categoryId: String,
-        difficultyId: String
+        category: String,
+        difficulty: String
     ): Flow<List<Question>> = flow {
         try {
-            val remoteQuestions = quizRepository.getQuestionsFromApi(categoryId,difficultyId)
+            val remoteQuestions = quizRepository.getQuestionsFromApi(category,difficulty)
             remoteQuestions.let { questions ->
                 quizRepository.clearQuestions()
                 quizRepository.insertQuestions(questions.map { it.toQuestionEntity() })

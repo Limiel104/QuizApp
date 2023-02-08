@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class Question(
     @SerializedName("category")
-    val categoryId: String,
+    val category: String,
     @SerializedName("correctAnswer")
     val correctAnswer: String,
     @SerializedName("difficulty")
-    val difficultyId: String,
+    val difficulty: String,
     @SerializedName("incorrectAnswers")
     val incorrectAnswersList: List<String>,
     @SerializedName("question")

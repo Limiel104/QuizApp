@@ -1,4 +1,4 @@
-package com.example.quizapp.presentation.composable
+package com.example.quizapp.presentation.questions.composable
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*

@@ -1,4 +1,4 @@
-package com.example.quizapp.presentation.composable
+package com.example.quizapp.presentation.questions.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -6,13 +6,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.quizapp.presentation.questions.QuestionsViewModel
 import com.example.quizapp.ui.theme.Green
 import com.example.quizapp.ui.theme.LightGray3
 import com.example.quizapp.ui.theme.OffBlack
 import com.example.quizapp.ui.theme.Red
 
 @Composable
-fun QuestionsScreen() {
+fun QuestionsScreen(
+    navController: NavController,
+    viewModel: QuestionsViewModel = hiltViewModel()
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()

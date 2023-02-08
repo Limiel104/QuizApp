@@ -1,8 +1,7 @@
-package com.example.quizapp.presentation.composable
+package com.example.quizapp.presentation.select_category.composable
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -17,15 +16,15 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CategoryCard(
+    modifier: Modifier,
     categoryImageId: Int,
     label: String
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .width(150.dp)
             .height(90.dp)
             .background(Color.White)
-            .clickable { }
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

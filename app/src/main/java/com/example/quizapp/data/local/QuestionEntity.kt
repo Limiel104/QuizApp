@@ -5,13 +5,13 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class QuestionEntity(
-    val categoryId: String,
+    val category: String,
     val correctAnswer: String,
     val incorrectAnswer1: String,
     val incorrectAnswer2: String,
     val incorrectAnswer3: String,
     val question: String,
-    val difficultyId: String,
+    val difficulty: String,
     @PrimaryKey
     val id: Int? = null
 )
