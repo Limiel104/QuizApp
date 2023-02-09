@@ -5,6 +5,7 @@ import com.example.quizapp.domain.model.Question
 
 fun QuestionEntity.toQuestion(): Question {
     return Question(
+        id = id,
         category = category,
         correctAnswer = correctAnswer,
         incorrectAnswersList = listOf(incorrectAnswer1,incorrectAnswer2,incorrectAnswer3),
@@ -15,6 +16,7 @@ fun QuestionEntity.toQuestion(): Question {
 
 fun Question.toQuestionEntity(): QuestionEntity {
     return QuestionEntity(
+        id = id,
         category = category,
         correctAnswer = correctAnswer,
         incorrectAnswer1 = incorrectAnswersList[0],

@@ -3,6 +3,8 @@ package com.example.quizapp.domain.model
 import com.google.gson.annotations.SerializedName
 
 data class Question(
+    @SerializedName("id")
+    val id: String,
     @SerializedName("category")
     val category: String,
     @SerializedName("correctAnswer")

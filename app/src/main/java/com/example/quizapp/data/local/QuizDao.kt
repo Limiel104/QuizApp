@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.quizapp.domain.model.Question
 
 @Dao
 interface QuizDao {
@@ -14,9 +13,16 @@ interface QuizDao {
         questionEntities: List<QuestionEntity>
     )
 
-    @Query("DELETE FROM questionEntity")
-    suspend fun clearQuestions()
-
-    @Query("SELECT * FROM questionEntity")
-    suspend fun getAllQuestions(): List<QuestionEntity>
+    @Query(
+        """
+            SELECT * 
+            FROM questionEntity
+            WHERE category = :category
+            AND difficulty LIKE :difficulty
+        """
+    )
+    suspend fun getQuestions(
+        category: String,
+        difficulty: String
+    ): List<QuestionEntity>
 }

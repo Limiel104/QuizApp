@@ -32,17 +32,47 @@ class QuestionsViewModel @Inject constructor(
             )
         }
 
-        getQuestions(_questionState.value.category,_questionState.value.difficulty)
+        getQuestions(_questionState.value.category, _questionState.value.difficulty)
     }
 
     private fun getQuestions(category: String, difficulty: String) {
         viewModelScope.launch {
-            quizUseCases.getQuestionsUseCase(category,difficulty).collect { questions ->
+            quizUseCases.getQuestionsFromApiUseCase(category, difficulty).collect { questions ->
                 _questionState.value = questionState.value.copy(
                     questionList = questions
                 )
-                Log.i("TAG",_questionState.value.questionList.toString())
+                Log.i("TAG VM REMOTE", _questionState.value.questionList.toString())
             }
+            if (_questionState.value.questionList.isEmpty()) {
+                getQuestionsFromDb(category, difficulty)
+            }
+        }
+    }
+
+    private fun getQuestionsFromDb(category: String, difficulty: String) {
+        viewModelScope.launch {
+            quizUseCases.getQuestionsFromDbUseCase(getCategoryEntity(category), difficulty)
+                .collect { questions ->
+                    _questionState.value = questionState.value.copy(
+                        questionList = questions
+                    )
+                    Log.i("TAG VM LOCAL", _questionState.value.questionList.toString())
+                }
+        }
+    }
+
+    private fun getCategoryEntity(category: String): String {
+        return when (category) {
+            "art_and_literature" -> "Art & Literature"
+            "film_and_tv" -> "Film & TV"
+            "food_and_drink" -> "Food & Drink"
+            "general_knowledge" -> "General Knowledge"
+            "geography" -> "Geography"
+            "history" -> "History"
+            "music" -> "Music"
+            "science" -> "Science"
+            "society_and_culture" -> "Society & Culture"
+            else -> "Sport & Leisure"
         }
     }
 }

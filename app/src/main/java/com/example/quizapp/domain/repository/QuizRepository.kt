@@ -7,14 +7,13 @@ interface QuizRepository {
 
     suspend fun insertQuestions(questionEntities: List<QuestionEntity>)
 
-    suspend fun clearQuestions()
-
-    suspend fun getAllQuestions(): List<QuestionEntity>
-
     suspend fun getQuestionsFromApi(
-        categoryId: String,
-        difficultyId: String
+        category: String,
+        difficulty: String
     ): List<Question>
 
-    suspend fun getQuestionsFromDatabase(): List<QuestionEntity>
+    suspend fun getQuestionsFromDatabase(
+        category: String,
+        difficulty: String
+    ): List<QuestionEntity>
 }

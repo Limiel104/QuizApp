@@ -13,5 +13,5 @@ data class QuestionEntity(
     val question: String,
     val difficulty: String,
     @PrimaryKey
-    val id: Int? = null
+    val id: String
 )

@@ -6,7 +6,8 @@ import com.example.quizapp.data.local.QuizDatabase
 import com.example.quizapp.data.remote.TriviaApi
 import com.example.quizapp.data.repository.QuizRepositoryImpl
 import com.example.quizapp.domain.repository.QuizRepository
-import com.example.quizapp.domain.use_case.GetQuestionsUseCase
+import com.example.quizapp.domain.use_case.GetQuestionsFromApiUseCase
+import com.example.quizapp.domain.use_case.GetQuestionsFromDbUseCase
 import com.example.quizapp.domain.use_case.QuizUseCases
 import dagger.Module
 import dagger.Provides
@@ -51,7 +52,8 @@ object AppModule {
     @Singleton
     fun provideQuizUseCases(repository: QuizRepository): QuizUseCases {
         return QuizUseCases(
-            getQuestionsUseCase = GetQuestionsUseCase(repository)
+            getQuestionsFromApiUseCase = GetQuestionsFromApiUseCase(repository),
+            getQuestionsFromDbUseCase = GetQuestionsFromDbUseCase(repository)
         )
     }
 }

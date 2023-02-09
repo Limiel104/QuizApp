@@ -18,22 +18,17 @@ class QuizRepositoryImpl @Inject constructor(
         dao.insertQuestions(questionEntities)
     }
 
-    override suspend fun clearQuestions() {
-        dao.clearQuestions()
-    }
-
-    override suspend fun getAllQuestions(): List<QuestionEntity> {
-        return dao.getAllQuestions()
-    }
-
     override suspend fun getQuestionsFromApi(
-        categoryId: String,
-        difficultyId: String
+        category: String,
+        difficulty: String
     ): List<Question> {
-        return api.getQuestions(categoryId, difficultyId)
+        return api.getQuestions(category, difficulty)
     }
 
-    override suspend fun getQuestionsFromDatabase(): List<QuestionEntity> {
-        return dao.getAllQuestions()
+    override suspend fun getQuestionsFromDatabase(
+        category: String,
+        difficulty: String
+    ): List<QuestionEntity> {
+        return dao.getQuestions(category, difficulty)
     }
 }
