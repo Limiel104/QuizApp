@@ -37,27 +37,28 @@ class QuestionsViewModel @Inject constructor(
 
     private fun getQuestions(category: String, difficulty: String) {
         viewModelScope.launch {
-            quizUseCases.getQuestionsFromApiUseCase(category, difficulty).collect { questions ->
-                _questionState.value = questionState.value.copy(
-                    questionList = questions
-                )
-                Log.i("TAG VM REMOTE", _questionState.value.questionList.toString())
-            }
-            if (_questionState.value.questionList.isEmpty()) {
+            getQuestionsFromApi(category, difficulty)
+            if(_questionState.value.questionList.isEmpty()) {
                 getQuestionsFromDb(category, difficulty)
             }
         }
     }
 
-    private fun getQuestionsFromDb(category: String, difficulty: String) {
-        viewModelScope.launch {
-            quizUseCases.getQuestionsFromDbUseCase(getCategoryEntity(category), difficulty)
-                .collect { questions ->
-                    _questionState.value = questionState.value.copy(
-                        questionList = questions
-                    )
-                    Log.i("TAG VM LOCAL", _questionState.value.questionList.toString())
-                }
+    private suspend fun getQuestionsFromApi(category: String, difficulty: String) {
+        quizUseCases.getQuestionsFromApiUseCase(category, difficulty).collect { questions ->
+            _questionState.value = questionState.value.copy(
+                questionList = questions
+            )
+            Log.i("TAG VM REMOTE", _questionState.value.questionList.toString())
+        }
+    }
+
+    private suspend fun getQuestionsFromDb(category: String, difficulty: String) {
+        quizUseCases.getQuestionsFromDbUseCase(getCategoryEntity(category), difficulty).collect { questions ->
+            _questionState.value = questionState.value.copy(
+                questionList = questions
+            )
+            Log.i("TAG VM LOCAL", _questionState.value.questionList.toString())
         }
     }
 

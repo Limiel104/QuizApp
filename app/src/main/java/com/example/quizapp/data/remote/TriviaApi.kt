@@ -8,8 +8,8 @@ interface TriviaApi {
 
     @GET("api/questions?limit=3")
     suspend fun getQuestions(
-        @Query("categories") categoryId: String,
-        @Query("difficulty") difficultyId: String
+        @Query("categories") category: String,
+        @Query("difficulty") difficulty: String
     ): List<Question>
 
     companion object {

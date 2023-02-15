@@ -19,8 +19,8 @@ class SelectDifficultyViewModel @Inject constructor(
     init {
         savedStateHandle.get<String>("category")?.let { category ->
             _state.value = _state.value.copy(
-                        selectedCategory = category
-                    )
+                selectedCategory = category
+            )
         }
 
         savedStateHandle.get<String>("label")?.let { label ->
