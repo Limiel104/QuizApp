@@ -19,6 +19,8 @@ interface QuizDao {
             FROM questionEntity
             WHERE category = :category
             AND difficulty LIKE :difficulty
+            ORDER BY random()
+            LIMIT 3
         """
     )
     suspend fun getQuestions(
