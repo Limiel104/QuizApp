@@ -6,6 +6,7 @@ import com.example.quizapp.domain.model.Question
 import com.example.quizapp.domain.repository.QuizRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import java.io.IOException
 import javax.inject.Inject
 
 class GetQuestionsFromApiUseCase @Inject constructor(
@@ -17,13 +18,13 @@ class GetQuestionsFromApiUseCase @Inject constructor(
     ): Flow<List<Question>> = flow {
         try {
             val remoteQuestions = quizRepository.getQuestionsFromApi(category,difficulty)
-            Log.i("TAG REMOTE",remoteQuestions.toString())
+            //Log.i("TAG REMOTE",remoteQuestions.toString())
             remoteQuestions.let { questions ->
                 quizRepository.insertQuestions(questions.map { it.toQuestionEntity() })
                 emit(questions)
             }
-        } catch (e: Exception) {
-            Log.i("TAG",e.message.toString())
+        } catch (e: IOException) {
+            //Log.i("TAG",e.message.toString())
             emit(emptyList())
         }
     }
