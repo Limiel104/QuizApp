@@ -18,13 +18,13 @@ class GetQuestionsFromApiUseCase @Inject constructor(
     ): Flow<List<Question>> = flow {
         try {
             val remoteQuestions = quizRepository.getQuestionsFromApi(category,difficulty)
-            //Log.i("TAG REMOTE",remoteQuestions.toString())
+            Log.i("TAG REMOTE",remoteQuestions.toString())
             remoteQuestions.let { questions ->
                 quizRepository.insertQuestions(questions.map { it.toQuestionEntity() })
                 emit(questions)
             }
         } catch (e: IOException) {
-            //Log.i("TAG",e.message.toString())
+            Log.i("TAG",e.message.toString())
             emit(emptyList())
         }
     }

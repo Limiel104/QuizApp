@@ -173,4 +173,14 @@ class GetQuestionsFromDbUseCaseTest {
             assertThat(question.difficulty).isNotEqualTo("Medium")
         }
     }
+
+    @Test
+    fun returnListIsOfCorrectSize() = runBlocking {
+        val questions = getQuestionsFromDbUseCase(
+            category = "Geography",
+            difficulty = "Easy"
+        ).first()
+
+        assertThat(questions.size).isEqualTo(7)
+    }
 }

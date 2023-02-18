@@ -73,8 +73,8 @@ class FakeQuizRepository : QuizRepository {
 
         val responseFromApi = mutableListOf<Question>()
 
-        while(responseFromApi.size < 3) {
-            for(question in questionsFromApi){
+        for(question in questionsFromApi){
+            if(responseFromApi.size < 7) {
                 if(question.category == category && question.difficulty == difficulty) {
                     responseFromApi.add(question)
                 }
@@ -90,8 +90,8 @@ class FakeQuizRepository : QuizRepository {
     ): List<QuestionEntity> {
         val questionsFromDb = mutableListOf<QuestionEntity>()
 
-        while(questionsFromDb.size < 3) {
-            for(question in questionEntitiesList){
+        for(question in questionEntitiesList){
+            if(questionsFromDb.size < 7) {
                 if(question.category == category && question.difficulty == difficulty) {
                     questionsFromDb.add(question)
                 }

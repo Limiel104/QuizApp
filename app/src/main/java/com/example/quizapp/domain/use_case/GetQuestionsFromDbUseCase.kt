@@ -16,7 +16,7 @@ class GetQuestionsFromDbUseCase @Inject constructor(
         difficulty: String
     ): Flow<List<Question>> = flow {
         val localQuestions = quizRepository.getQuestionsFromDatabase(category,difficulty)
-        //Log.i("TAG LOCAL",localQuestions.toString())
+        Log.i("TAG LOCAL",localQuestions.toString())
         if(localQuestions.isNotEmpty()) {
             emit(localQuestions.map { it.toQuestion() })
         }

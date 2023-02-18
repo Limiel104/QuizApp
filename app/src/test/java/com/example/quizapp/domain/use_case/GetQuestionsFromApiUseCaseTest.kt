@@ -91,4 +91,14 @@ class GetQuestionsFromApiUseCaseTest {
             assertThat(question.difficulty).isNotEqualTo("Medium")
         }
     }
+
+    @Test
+    fun returnListIsOfCorrectSize() = runBlocking {
+        val questions = getQuestionsFromApiUseCase(
+            category = "Geography",
+            difficulty = "Easy"
+        ).first()
+
+        assertThat(questions.size).isEqualTo(7)
+    }
 }
