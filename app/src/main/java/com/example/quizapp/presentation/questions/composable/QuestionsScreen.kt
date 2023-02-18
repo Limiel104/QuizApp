@@ -8,17 +8,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.quizapp.presentation.questions.QuestionsEvent
 import com.example.quizapp.presentation.questions.QuestionsViewModel
-import com.example.quizapp.ui.theme.Green
 import com.example.quizapp.ui.theme.LightGray3
-import com.example.quizapp.ui.theme.OffBlack
-import com.example.quizapp.ui.theme.Red
 
 @Composable
 fun QuestionsScreen(
     navController: NavController,
     viewModel: QuestionsViewModel = hiltViewModel()
 ) {
+    val questionState = viewModel.displayedQuestionState.value.question
+    val answersState = viewModel.displayedQuestionState.value.answers
+    val answersColorState = viewModel.displayedQuestionState.value.answersColors
+    val counterState = viewModel.displayedQuestionState.value.counter
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -33,29 +36,41 @@ fun QuestionsScreen(
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
             QuestionTitle(
-                number = "Question 1",
-                question = "What Word Is Used To Describe Bell Shaped Flowers?"
+                number = "Question $counterState",
+                question = questionState
             )
 
             Column() {
                 QuestionButton(
-                    text = "Campanulate",
-                    color = Green
+                    text = answersState[0],
+                    color = answersColorState[0],
+                    onClick = {
+                        viewModel.onEvent(QuestionsEvent.SelectedAnswer(answersState[0]))
+                    }
                 )
 
                 QuestionButton(
-                    text = "Clochical",
-                    color = OffBlack
+                    text = answersState[1],
+                    color = answersColorState[1],
+                    onClick = {
+                        viewModel.onEvent(QuestionsEvent.SelectedAnswer(answersState[1]))
+                    }
                 )
 
                 QuestionButton(
-                    text = "Cambarn",
-                    color = Red
+                    text = answersState[2],
+                    color = answersColorState[2],
+                    onClick = {
+                        viewModel.onEvent(QuestionsEvent.SelectedAnswer(answersState[2]))
+                    }
                 )
 
                 QuestionButton(
-                    text = "Belieux",
-                    color = OffBlack
+                    text = answersState[3],
+                    color = answersColorState[3],
+                    onClick = {
+                        viewModel.onEvent(QuestionsEvent.SelectedAnswer(answersState[3]))
+                    }
                 )
             }
         }

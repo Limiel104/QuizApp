@@ -15,7 +15,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun QuestionButton(
     text: String,
-    color: Color
+    color: Color,
+    onClick: (String) -> Unit
 ) {
     OutlinedButton(
         colors = ButtonDefaults.buttonColors(Color.White),
@@ -27,7 +28,7 @@ fun QuestionButton(
             ),
         border = BorderStroke(1.dp, color),
         shape = RoundedCornerShape(35.dp),
-        onClick = { /*TODO*/ }
+        onClick = { onClick(text) }
     ) {
         Text(
             text = text,
