@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.quizapp.ui.theme.OffBlack
 
 @Composable
 fun QuestionButton(
@@ -18,23 +19,46 @@ fun QuestionButton(
     color: Color,
     onClick: (String) -> Unit
 ) {
-    OutlinedButton(
-        colors = ButtonDefaults.buttonColors(Color.White),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(
-                horizontal = 25.dp,
-                vertical = 9.dp
-            ),
-        border = BorderStroke(1.dp, color),
-        shape = RoundedCornerShape(35.dp),
-        onClick = { onClick(text) }
-    ) {
-        Text(
-            text = text,
-            color = color,
+    if(color != OffBlack) {
+        OutlinedButton(
+            colors = ButtonDefaults.buttonColors(color),
             modifier = Modifier
-                .padding(7.dp)
-        )
+                .fillMaxWidth()
+                .padding(
+                    horizontal = 25.dp,
+                    vertical = 9.dp
+                ),
+            border = BorderStroke(1.dp, color),
+            shape = RoundedCornerShape(35.dp),
+            onClick = { onClick(text) }
+        ) {
+            Text(
+                text = text,
+                color = Color.White,
+                modifier = Modifier
+                    .padding(7.dp)
+            )
+        }
+    }
+    else {
+        OutlinedButton(
+            colors = ButtonDefaults.buttonColors(Color.White),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = 25.dp,
+                    vertical = 9.dp
+                ),
+            border = BorderStroke(1.dp, color),
+            shape = RoundedCornerShape(35.dp),
+            onClick = { onClick(text) }
+        ) {
+            Text(
+                text = text,
+                color = color,
+                modifier = Modifier
+                    .padding(7.dp)
+            )
+        }
     }
 }

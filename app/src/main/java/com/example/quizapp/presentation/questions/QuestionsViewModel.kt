@@ -30,6 +30,9 @@ class QuestionsViewModel @Inject constructor(
     private val _displayedQuestionState = mutableStateOf(DisplayedQuestionState())
     val displayedQuestionState: State<DisplayedQuestionState> = _displayedQuestionState
 
+    private val _timerState = mutableStateOf(TimerState())
+    val timerState: State<TimerState> = _timerState
+
     init {
         savedStateHandle.get<String>("category")?.let { category ->
             _questionListState.value = _questionListState.value.copy(
@@ -44,6 +47,8 @@ class QuestionsViewModel @Inject constructor(
         }
 
         getQuestions(_questionListState.value.category, _questionListState.value.difficulty)
+        startTimer()
+        setDisplayedTime(0)
     }
 
     fun onEvent(event: QuestionsEvent) {
@@ -52,18 +57,26 @@ class QuestionsViewModel @Inject constructor(
                 setAnswersColors(event.value)
                 setResult(event.value)
                 Timer().schedule(700) {
-                    Log.i("TAG DELAY","0.5s")
+                    Log.i("TAG DELAY","0.7s")
                     val wasLastQuestionDisplayed = _displayedQuestionState.value.counter == 7
 
                     if(wasLastQuestionDisplayed) {
                         Log.i("TAG","LAST QUESTION WAS DISPLAYED")
                         Log.i("TAG RESULT",_displayedQuestionState.value.result.toString())
+                        stopTimer()
                     }
                     else {
                         val nextQuestionNumber = _displayedQuestionState.value.counter + 1
                         setDisplayedQuestion(nextQuestionNumber)
                     }
                 }
+            }
+            is QuestionsEvent.TimeDisplayedChange -> {
+                val currentTimeInSeconds = event.value+1
+                _timerState.value = timerState.value.copy(
+                    currentTimeInSeconds = currentTimeInSeconds
+                )
+                setDisplayedTime(currentTimeInSeconds)
             }
         }
     }
@@ -166,5 +179,33 @@ class QuestionsViewModel @Inject constructor(
                 result = oldResult + 1
             )
         }
+    }
+
+    private fun startTimer() {
+        _timerState.value = timerState.value.copy(
+            isTimerRunning = true
+        )
+    }
+
+    private fun stopTimer() {
+        _timerState.value = timerState.value.copy(
+            isTimerRunning = false
+        )
+    }
+
+    private fun setDisplayedTime(currentTimeInSeconds: Int) {
+        val minutes = currentTimeInSeconds/60
+        val seconds = currentTimeInSeconds - (minutes*60)
+        var timeToDisplay = ""
+
+        timeToDisplay = if(seconds<10) {
+            "$minutes:0$seconds"
+        } else {
+            "$minutes:$seconds"
+        }
+
+        _timerState.value = timerState.value.copy(
+            displayedTime = timeToDisplay
+        )
     }
 }

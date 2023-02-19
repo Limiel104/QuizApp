@@ -5,12 +5,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.quizapp.presentation.questions.QuestionsEvent
 import com.example.quizapp.presentation.questions.QuestionsViewModel
 import com.example.quizapp.ui.theme.LightGray3
+import kotlinx.coroutines.delay
 
 @Composable
 fun QuestionsScreen(
@@ -21,6 +23,16 @@ fun QuestionsScreen(
     val answersState = viewModel.displayedQuestionState.value.answers
     val answersColorState = viewModel.displayedQuestionState.value.answersColors
     val counterState = viewModel.displayedQuestionState.value.counter
+    val timer = viewModel.timerState.value.displayedTime
+    val currentTime = viewModel.timerState.value.currentTimeInSeconds
+    val isTimerRunning = viewModel.timerState.value.isTimerRunning
+
+    LaunchedEffect(key1 = isTimerRunning, key2 = currentTime) {
+        if(isTimerRunning) {
+            delay(1000L)
+            viewModel.onEvent(QuestionsEvent.TimeDisplayedChange(currentTime))
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -28,7 +40,7 @@ fun QuestionsScreen(
             .background(LightGray3),
     ) {
         Timer(
-            time = "4:37"
+            time = timer
         )
 
         Column(
