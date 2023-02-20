@@ -112,7 +112,7 @@ class QuestionsViewModel @Inject constructor(
 
     private fun getCategoryEntity(category: String): String {
         return when (category) {
-            "art_and_literature" -> "Art & Literature"
+            "arts_and_literature" -> "Art & Literature"
             "film_and_tv" -> "Film & TV"
             "food_and_drink" -> "Food & Drink"
             "general_knowledge" -> "General Knowledge"

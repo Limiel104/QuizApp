@@ -58,7 +58,7 @@ fun SelectCategoryScreen(
                     modifier = Modifier.clickable {
                         navController.navigate(
                             Screen.SelectDifficultyScreen.route
-                                    + "category=art_and_literature"
+                                    + "category=arts_and_literature"
                                     + "&label=Art & Literature"
                                     + "&iconId=${R.drawable.art_big}"
                         )
