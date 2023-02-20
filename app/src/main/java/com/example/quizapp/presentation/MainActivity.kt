@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.quizapp.presentation.questions.composable.QuestionsScreen
+import com.example.quizapp.presentation.results.composable.ResultsScreen
 import com.example.quizapp.presentation.select_category.composable.SelectCategoryScreen
 import com.example.quizapp.presentation.select_difficulty.composable.SelectDifficultyScreen
 import com.example.quizapp.ui.theme.*
@@ -76,6 +77,23 @@ class MainActivity : ComponentActivity() {
                             )
                         ) {
                             QuestionsScreen(navController = navController)
+                        }
+                        composable(
+                            route = Screen.ResultsScreen.route + "result={result}&time={time}",
+                            arguments = listOf(
+                                navArgument(
+                                    name = "result"
+                                ) {
+                                    type = NavType.IntType
+                                },
+                                navArgument(
+                                    name = "time"
+                                ) {
+                                    type = NavType.IntType
+                                },
+                            )
+                        ) {
+                            ResultsScreen(navController = navController)
                         }
                     }
                 }

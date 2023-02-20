@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import com.example.quizapp.presentation.questions.QuestionsEvent
 import com.example.quizapp.presentation.questions.QuestionsViewModel
 import com.example.quizapp.ui.theme.LightGray3
+import com.example.quizapp.util.Screen
 import kotlinx.coroutines.delay
 
 @Composable
@@ -23,14 +24,22 @@ fun QuestionsScreen(
     val answersState = viewModel.displayedQuestionState.value.answers
     val answersColorState = viewModel.displayedQuestionState.value.answersColors
     val counterState = viewModel.displayedQuestionState.value.counter
-    val timer = viewModel.timerState.value.displayedTime
+    val time = viewModel.timerState.value.displayedTime
     val currentTime = viewModel.timerState.value.currentTimeInSeconds
     val isTimerRunning = viewModel.timerState.value.isTimerRunning
+    val result = viewModel.displayedQuestionState.value.result
 
     LaunchedEffect(key1 = isTimerRunning, key2 = currentTime) {
         if(isTimerRunning) {
             delay(1000L)
             viewModel.onEvent(QuestionsEvent.TimeDisplayedChange(currentTime))
+        }
+        else {
+            navController.navigate(
+                Screen.ResultsScreen.route
+                        + "result=${result}"
+                        + "&time=${currentTime}"
+            )
         }
     }
 
@@ -40,7 +49,7 @@ fun QuestionsScreen(
             .background(LightGray3),
     ) {
         Timer(
-            time = timer
+            time = time
         )
 
         Column(

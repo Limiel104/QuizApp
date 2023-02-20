@@ -1,4 +1,4 @@
-package com.example.quizapp.presentation.composable
+package com.example.quizapp.presentation.results.composable
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -15,13 +15,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.quizapp.presentation.results.ResultsViewModel
 import com.example.quizapp.ui.theme.Green
 import com.example.quizapp.ui.theme.LightGray3
 import com.example.quizapp.ui.theme.OffBlack
 import com.example.quizapp.ui.theme.Red
+import com.example.quizapp.util.Screen
 
 @Composable
-fun ResultsScreen() {
+fun ResultsScreen(
+    navController: NavController,
+    viewModel: ResultsViewModel = hiltViewModel()
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -83,7 +90,9 @@ fun ResultsScreen() {
                 ),
             border = BorderStroke(1.dp, OffBlack),
             shape = RoundedCornerShape(35.dp),
-            onClick = { /*TODO*/ }
+            onClick = {
+                navController.popBackStack(Screen.SelectCategoryScreen.route,false)
+            }
         ) {
             Text(
                 text = "Go Back",

@@ -58,9 +58,9 @@ class QuestionsViewModel @Inject constructor(
                 setResult(event.value)
                 Timer().schedule(700) {
                     Log.i("TAG DELAY","0.7s")
-                    val wasLastQuestionDisplayed = _displayedQuestionState.value.counter == 7
+                    val wasLastQuestionAnswered = _displayedQuestionState.value.counter == 7
 
-                    if(wasLastQuestionDisplayed) {
+                    if(wasLastQuestionAnswered) {
                         Log.i("TAG","LAST QUESTION WAS DISPLAYED")
                         Log.i("TAG RESULT",_displayedQuestionState.value.result.toString())
                         stopTimer()
