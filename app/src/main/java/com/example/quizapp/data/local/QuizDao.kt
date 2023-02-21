@@ -20,7 +20,7 @@ interface QuizDao {
             WHERE category = :category
             AND difficulty LIKE :difficulty
             ORDER BY random()
-            LIMIT 7
+            LIMIT 20
         """
     )
     suspend fun getQuestions(

@@ -6,7 +6,7 @@ import retrofit2.http.Query
 
 interface TriviaApi {
 
-    @GET("api/questions?limit=7")
+    @GET("api/questions?limit=20")
     suspend fun getQuestions(
         @Query("categories") category: String,
         @Query("difficulty") difficulty: String

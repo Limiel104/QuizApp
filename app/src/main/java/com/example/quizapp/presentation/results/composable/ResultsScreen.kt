@@ -29,6 +29,13 @@ fun ResultsScreen(
     navController: NavController,
     viewModel: ResultsViewModel = hiltViewModel()
 ) {
+    val correctAnswers = viewModel.resultsState.value.correctAnswers
+    val incorrectAnswers = viewModel.resultsState.value.incorrectAnswers
+    val time = viewModel.resultsState.value.time
+    val rating = viewModel.resultsState.value.resultRating
+    val ratingColor = viewModel.resultsState.value.ratingColor
+    val accuracy = viewModel.resultsState.value.accuracy
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -47,7 +54,18 @@ fun ResultsScreen(
         )
 
         Text(
-            text = "Accuracy: 89,9%",
+            text = "Accuracy: $accuracy%",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp),
+            color = OffBlack,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 24.sp
+        )
+
+        Text(
+            text = "Time: $time",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 10.dp),
@@ -63,21 +81,21 @@ fun ResultsScreen(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             ResultCard(
-                result = "16",
+                result = correctAnswers,
                 title = "Correct",
                 resultColor = Green
             )
 
             ResultCard(
-                result = "4",
+                result = incorrectAnswers,
                 title = "Incorrect",
                 resultColor = Red
             )
         }
 
         ResultRating(
-            rating = "Very Good",
-            color = Green
+            rating = rating,
+            color = ratingColor
         )
 
         OutlinedButton(

@@ -11,6 +11,7 @@ import com.example.quizapp.domain.use_case.QuizUseCases
 import com.example.quizapp.ui.theme.Green
 import com.example.quizapp.ui.theme.OffBlack
 import com.example.quizapp.ui.theme.Red
+import com.example.quizapp.util.Constants.QUESTIONS_NUMBER
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -58,7 +59,7 @@ class QuestionsViewModel @Inject constructor(
                 setResult(event.value)
                 Timer().schedule(700) {
                     Log.i("TAG DELAY","0.7s")
-                    val wasLastQuestionAnswered = _displayedQuestionState.value.counter == 7
+                    val wasLastQuestionAnswered = _displayedQuestionState.value.counter == QUESTIONS_NUMBER
 
                     if(wasLastQuestionAnswered) {
                         Log.i("TAG","LAST QUESTION WAS DISPLAYED")

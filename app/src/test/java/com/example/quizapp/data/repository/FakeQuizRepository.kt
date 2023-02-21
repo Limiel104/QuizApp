@@ -3,6 +3,7 @@ package com.example.quizapp.data.repository
 import com.example.quizapp.data.local.QuestionEntity
 import com.example.quizapp.domain.model.Question
 import com.example.quizapp.domain.repository.QuizRepository
+import com.example.quizapp.util.Constants.QUESTIONS_NUMBER
 
 class FakeQuizRepository : QuizRepository {
 
@@ -74,7 +75,7 @@ class FakeQuizRepository : QuizRepository {
         val responseFromApi = mutableListOf<Question>()
 
         for(question in questionsFromApi){
-            if(responseFromApi.size < 7) {
+            if(responseFromApi.size < QUESTIONS_NUMBER) {
                 if(question.category == category && question.difficulty == difficulty) {
                     responseFromApi.add(question)
                 }
@@ -91,7 +92,7 @@ class FakeQuizRepository : QuizRepository {
         val questionsFromDb = mutableListOf<QuestionEntity>()
 
         for(question in questionEntitiesList){
-            if(questionsFromDb.size < 7) {
+            if(questionsFromDb.size < QUESTIONS_NUMBER) {
                 if(question.category == category && question.difficulty == difficulty) {
                     questionsFromDb.add(question)
                 }
