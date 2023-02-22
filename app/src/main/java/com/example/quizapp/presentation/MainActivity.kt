@@ -15,6 +15,7 @@ import com.example.quizapp.presentation.questions.composable.QuestionsScreen
 import com.example.quizapp.presentation.results.composable.ResultsScreen
 import com.example.quizapp.presentation.select_category.composable.SelectCategoryScreen
 import com.example.quizapp.presentation.select_difficulty.composable.SelectDifficultyScreen
+import com.example.quizapp.presentation.stats.composable.StatsScreen
 import com.example.quizapp.ui.theme.*
 import com.example.quizapp.util.Screen
 import dagger.hilt.android.AndroidEntryPoint
@@ -95,9 +96,16 @@ class MainActivity : ComponentActivity() {
                         ) {
                             ResultsScreen(navController = navController)
                         }
+                        composable(
+                            route = Screen.StatsScreen.route
+                        ) {
+                            StatsScreen(navController = navController)
+                        }
                     }
                 }
             }
         }
     }
 }
+
+
