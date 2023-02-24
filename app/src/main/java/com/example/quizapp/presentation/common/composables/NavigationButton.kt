@@ -1,4 +1,4 @@
-package com.example.quizapp.presentation.select_difficulty.composable
+package com.example.quizapp.presentation.common.composables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.quizapp.ui.theme.OffBlack
 
 @Composable
-fun DifficultyButton(
+fun NavigationButton(
     text: String,
     onClick: () -> Unit
 ) {

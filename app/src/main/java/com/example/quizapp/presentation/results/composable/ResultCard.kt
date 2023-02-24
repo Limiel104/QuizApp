@@ -1,9 +1,7 @@
 package com.example.quizapp.presentation.results.composable
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -15,16 +13,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.quizapp.ui.theme.OffBlack
 
 @Composable
 fun ResultCard(
     result: String,
     title: String,
-    resultColor: Color
+    resultColor: Color,
+    height: Int,
+    width: Int,
+    fontSize: Int
 ) {
     Card(
         modifier = Modifier
-            .size(100.dp)
+            .height(height.dp)
+            .width(width.dp)
             .background(Color.White)
     ) {
         Column(
@@ -35,7 +38,7 @@ fun ResultCard(
                 text = result,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.body1,
-                fontSize = 26.sp,
+                fontSize = fontSize.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = resultColor
             )
@@ -44,8 +47,8 @@ fun ResultCard(
                 text = title,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.body1,
-                fontSize = 20.sp,
-                color = resultColor
+                fontSize = 14.sp,
+                color = OffBlack
             )
         }
     }

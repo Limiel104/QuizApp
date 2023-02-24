@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.quizapp.presentation.common.composables.NavigationButton
 import com.example.quizapp.presentation.select_difficulty.SelectDifficultyViewModel
 import com.example.quizapp.ui.theme.LightGray3
 import com.example.quizapp.ui.theme.OffBlack
@@ -67,7 +68,7 @@ fun SelectDifficultyScreen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            DifficultyButton(
+            NavigationButton(
                 text = "Easy",
                 onClick = {
                     navController.navigate(
@@ -78,7 +79,7 @@ fun SelectDifficultyScreen(
                 }
             )
 
-            DifficultyButton(
+            NavigationButton(
                 text = "Medium",
                 onClick = {
                     navController.navigate(
@@ -89,7 +90,7 @@ fun SelectDifficultyScreen(
                 }
             )
 
-            DifficultyButton(
+            NavigationButton(
                 text = "Hard",
                 onClick = {
                     navController.navigate(

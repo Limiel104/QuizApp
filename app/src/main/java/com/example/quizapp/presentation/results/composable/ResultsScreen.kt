@@ -1,22 +1,18 @@
 package com.example.quizapp.presentation.results.composable
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.quizapp.presentation.common.composables.NavigationButton
 import com.example.quizapp.presentation.results.ResultsViewModel
 import com.example.quizapp.ui.theme.Green
 import com.example.quizapp.ui.theme.LightGray3
@@ -44,7 +40,7 @@ fun ResultsScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Quiz Result",
+            text = "Quiz Results",
             modifier = Modifier
                 .fillMaxWidth(),
             color = OffBlack,
@@ -53,70 +49,82 @@ fun ResultsScreen(
             fontSize = 30.sp
         )
 
-        Text(
-            text = "Accuracy: $accuracy%",
+        Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp),
-            color = OffBlack,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 24.sp
-        )
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            ResultCard(
+                result = "$accuracy%",
+                title = "Accuracy",
+                resultColor = OffBlack,
+                height = 100,
+                width = 135,
+                fontSize = 26
+            )
 
-        Text(
-            text = "Time: $time",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp),
-            color = OffBlack,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 24.sp
-        )
+            Spacer(modifier = Modifier.width(10.dp))
+
+            ResultCard(
+                result = time,
+                title = "Time",
+                resultColor = OffBlack,
+                height = 100,
+                width = 135,
+                fontSize = 26
+            )
+        }
 
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.Center
         ) {
             ResultCard(
                 result = correctAnswers,
                 title = "Correct",
-                resultColor = Green
+                resultColor = Green,
+                height = 100,
+                width = 135,
+                fontSize = 26
             )
+
+            Spacer(modifier = Modifier.width(10.dp))
 
             ResultCard(
                 result = incorrectAnswers,
                 title = "Incorrect",
-                resultColor = Red
+                resultColor = Red,
+                height = 100,
+                width = 135,
+                fontSize = 26
             )
         }
 
-        ResultRating(
-            rating = rating,
-            color = ratingColor
+        ResultCard(
+            result = rating,
+            title = "Score",
+            resultColor = ratingColor,
+            height = 100,
+            width = 280,
+            fontSize = 34
         )
 
-        OutlinedButton(
-            colors = ButtonDefaults.buttonColors(Color.White),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    horizontal = 25.dp,
-                    vertical = 9.dp
-                ),
-            border = BorderStroke(1.dp, OffBlack),
-            shape = RoundedCornerShape(35.dp),
-            onClick = {
-                navController.popBackStack(Screen.SelectCategoryScreen.route,false)
-            }
-        ) {
-            Text(
+        Column() {
+            NavigationButton(
+                text = "See Stats for this category",
+                onClick = {
+                    navController.navigate(
+                        Screen.StatsScreen.route
+                    )
+                }
+            )
+
+            NavigationButton(
                 text = "Go Back",
-                color = OffBlack,
-                modifier = Modifier
-                    .padding(7.dp)
+                onClick = {
+                    navController.popBackStack(Screen.SelectCategoryScreen.route, false)
+                }
             )
         }
     }
