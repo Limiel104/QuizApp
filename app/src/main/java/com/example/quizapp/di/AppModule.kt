@@ -5,7 +5,9 @@ import androidx.room.Room
 import com.example.quizapp.data.local.QuizDatabase
 import com.example.quizapp.data.remote.TriviaApi
 import com.example.quizapp.data.repository.QuizRepositoryImpl
+import com.example.quizapp.data.repository.ResultRepositoryImpl
 import com.example.quizapp.domain.repository.QuizRepository
+import com.example.quizapp.domain.repository.ResultRepository
 import com.example.quizapp.domain.use_case.GetQuestionsFromApiUseCase
 import com.example.quizapp.domain.use_case.GetQuestionsFromDbUseCase
 import com.example.quizapp.domain.use_case.QuizUseCases
@@ -45,7 +47,13 @@ object AppModule {
     @Provides
     @Singleton
     fun provideQuizRepository(api: TriviaApi, db: QuizDatabase): QuizRepository {
-        return QuizRepositoryImpl(api,db.dao)
+        return QuizRepositoryImpl(api,db.quizDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideResultRepository(db: QuizDatabase): ResultRepository {
+        return ResultRepositoryImpl(db.resultDao)
     }
 
     @Provides
