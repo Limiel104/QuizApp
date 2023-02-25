@@ -29,6 +29,7 @@ fun QuestionsScreen(
     val isTimerRunning = viewModel.timerState.value.isTimerRunning
     val result = viewModel.displayedQuestionState.value.result
     val isButtonLocked = viewModel.displayedQuestionState.value.isButtonLocked
+    val category = viewModel.questionListState.value.category
 
     LaunchedEffect(key1 = isTimerRunning, key2 = currentTime) {
         if(isTimerRunning) {
@@ -38,8 +39,9 @@ fun QuestionsScreen(
         else {
             navController.navigate(
                 Screen.ResultsScreen.route
-                        + "result=${result}"
-                        + "&time=${currentTime}"
+                        + "result=$result"
+                        + "&time=$currentTime"
+                        + "&category=$category"
             )
         }
     }

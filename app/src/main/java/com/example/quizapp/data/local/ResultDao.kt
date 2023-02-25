@@ -17,8 +17,11 @@ interface ResultDao {
         """
             SELECT *
             FROM resultEntity
-            LIMIT 20
+            WHERE category = :category
+            LIMIT 25
         """
     )
-    suspend fun getResults(): List<ResultEntity>
+    suspend fun getResults(
+        category: String
+    ): List<ResultEntity>
 }

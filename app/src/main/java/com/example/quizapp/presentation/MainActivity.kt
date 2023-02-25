@@ -74,13 +74,13 @@ class MainActivity : ComponentActivity() {
                                     name = "difficulty"
                                 ) {
                                     type = NavType.StringType
-                                },
+                                }
                             )
                         ) {
                             QuestionsScreen(navController = navController)
                         }
                         composable(
-                            route = Screen.ResultsScreen.route + "result={result}&time={time}",
+                            route = Screen.ResultsScreen.route + "result={result}&time={time}&category={category}",
                             arguments = listOf(
                                 navArgument(
                                     name = "result"
@@ -92,12 +92,24 @@ class MainActivity : ComponentActivity() {
                                 ) {
                                     type = NavType.IntType
                                 },
+                                navArgument(
+                                    name = "category"
+                                ) {
+                                    type = NavType.StringType
+                                }
                             )
                         ) {
                             ResultsScreen(navController = navController)
                         }
                         composable(
-                            route = Screen.StatsScreen.route
+                            route = Screen.StatsScreen.route + "category={category}",
+                            arguments = listOf(
+                                navArgument(
+                                    name = "category"
+                                ) {
+                                    type = NavType.StringType
+                                }
+                            )
                         ) {
                             StatsScreen(navController = navController)
                         }

@@ -29,6 +29,12 @@ class ResultsViewModel @Inject constructor(
         savedStateHandle.get<Int>("time")?.let { time ->
             setTime(time)
         }
+
+        savedStateHandle.get<String>("category")?.let { category ->
+            _resultsState.value = resultsState.value.copy(
+                category = category
+            )
+        }
     }
 
     private fun calculateResults(correctAnswers: Int) {

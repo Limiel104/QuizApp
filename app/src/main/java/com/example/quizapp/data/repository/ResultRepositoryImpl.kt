@@ -13,7 +13,9 @@ class ResultRepositoryImpl @Inject constructor(
         dao.insertResult(resultEntity)
     }
 
-    override suspend fun getResults(): List<ResultEntity> {
-        return dao.getResults()
+    override suspend fun getResults(
+        category: String
+    ): List<ResultEntity> {
+        return dao.getResults(category)
     }
 }

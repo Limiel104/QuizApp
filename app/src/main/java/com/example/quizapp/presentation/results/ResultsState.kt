@@ -9,5 +9,6 @@ data class ResultsState(
     val time: String = "",
     val resultRating: String = "",
     val ratingColor: Color = OffBlack,
-    val accuracy: String = ""
+    val accuracy: String = "",
+    val category: String = "",
 )

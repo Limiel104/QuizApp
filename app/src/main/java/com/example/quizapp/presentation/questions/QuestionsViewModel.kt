@@ -14,7 +14,6 @@ import com.example.quizapp.ui.theme.OffBlack
 import com.example.quizapp.ui.theme.Red
 import com.example.quizapp.util.Constants.QUESTIONS_NUMBER
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -26,8 +25,8 @@ class QuestionsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
-    private val _questionListState = MutableStateFlow(QuestionListState())
-    private val questionListState = _questionListState.asStateFlow()
+    private val _questionListState = mutableStateOf(QuestionListState())
+    val questionListState: State<QuestionListState> = _questionListState
 
     private val _displayedQuestionState = mutableStateOf(DisplayedQuestionState())
     val displayedQuestionState: State<DisplayedQuestionState> = _displayedQuestionState
@@ -37,13 +36,13 @@ class QuestionsViewModel @Inject constructor(
 
     init {
         savedStateHandle.get<String>("category")?.let { category ->
-            _questionListState.value = _questionListState.value.copy(
+            _questionListState.value = questionListState.value.copy(
                 category = category
             )
         }
 
         savedStateHandle.get<String>("difficulty")?.let { difficulty ->
-            _questionListState.value = _questionListState.value.copy(
+            _questionListState.value = questionListState.value.copy(
                 difficulty = difficulty
             )
         }

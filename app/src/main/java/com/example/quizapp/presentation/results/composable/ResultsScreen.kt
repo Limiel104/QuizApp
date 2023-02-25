@@ -31,6 +31,7 @@ fun ResultsScreen(
     val rating = viewModel.resultsState.value.resultRating
     val ratingColor = viewModel.resultsState.value.ratingColor
     val accuracy = viewModel.resultsState.value.accuracy
+    val category = viewModel.resultsState.value.category
 
     Column(
         modifier = Modifier
@@ -112,10 +113,11 @@ fun ResultsScreen(
 
         Column() {
             NavigationButton(
-                text = "See Stats for this category",
+                text = "See best scores for this category",
                 onClick = {
                     navController.navigate(
                         Screen.StatsScreen.route
+                                + "category=$category"
                     )
                 }
             )

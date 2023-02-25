@@ -61,7 +61,8 @@ object AppModule {
             getQuestionsFromApiUseCase = GetQuestionsFromApiUseCase(questionRepository),
             getQuestionsFromDbUseCase = GetQuestionsFromDbUseCase(questionRepository),
             addQuestionToDbUseCase = AddQuestionToDbUseCase(questionRepository),
-            addResultUseCase = AddResultUseCase(resultRepository)
+            addResultUseCase = AddResultUseCase(resultRepository),
+            getStatsUseCase = GetStatsUseCase(resultRepository)
         )
     }
 }

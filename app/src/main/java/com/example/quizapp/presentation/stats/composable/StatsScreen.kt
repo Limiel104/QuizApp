@@ -12,14 +12,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.quizapp.presentation.stats.StatsViewModel
 import com.example.quizapp.ui.theme.LightGray3
 import com.example.quizapp.ui.theme.OffBlack
 
 @Composable
 fun StatsScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: StatsViewModel = hiltViewModel()
 ) {
+    val statsList = viewModel.statsListState.value.statsList
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -50,15 +55,10 @@ fun StatsScreen(
                     .fillMaxSize()
             ) {
                 itemsIndexed(
-                    items = listOf(
-                        "20-02-2023  15  1:23  Hard",
-                        "20-02-2023  13  5:00  Easy",
-                        "15-03-2023  18  0:56  Hard",
-                        "22-05-2022  12  3:02  Medium"
-                    )
+                    items = statsList
                 ) { index, item ->
                     StatsListItem(
-                        item = item,
+                        item = item.category,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }

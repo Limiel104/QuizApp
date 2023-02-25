@@ -4,5 +4,6 @@ data class QuizUseCases(
     val getQuestionsFromApiUseCase: GetQuestionsFromApiUseCase,
     val getQuestionsFromDbUseCase: GetQuestionsFromDbUseCase,
     val addQuestionToDbUseCase: AddQuestionToDbUseCase,
-    val addResultUseCase: AddResultUseCase
+    val addResultUseCase: AddResultUseCase,
+    val getStatsUseCase: GetStatsUseCase
 )
