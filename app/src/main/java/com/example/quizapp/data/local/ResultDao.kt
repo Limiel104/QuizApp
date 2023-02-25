@@ -18,7 +18,8 @@ interface ResultDao {
             SELECT *
             FROM resultEntity
             WHERE category = :category
-            LIMIT 25
+            ORDER BY score DESC
+            LIMIT 20
         """
     )
     suspend fun getResults(

@@ -8,7 +8,7 @@ import com.example.quizapp.domain.model.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetStatsUseCase @Inject constructor(
+class GetResultsUseCase @Inject constructor(
     private val resultRepository: ResultRepository
 ) {
     operator fun invoke(category: String): Flow<List<Result>> = flow {

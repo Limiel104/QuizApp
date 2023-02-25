@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -37,7 +36,7 @@ fun StatsScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Best 25 Scores",
+                text = "Best 20 Scores",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.h1,
@@ -48,7 +47,6 @@ fun StatsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LazyColumn(
                 modifier = Modifier
@@ -58,8 +56,11 @@ fun StatsScreen(
                     items = statsList
                 ) { index, item ->
                     StatsListItem(
-                        item = item.category,
-                        modifier = Modifier.fillMaxWidth()
+                        score = item.score.toString(),
+                        time = viewModel.setTime(item.time),
+                        difficulty = item.difficulty,
+                        date = viewModel.setDate(item.date),
+                        modifier = Modifier
                     )
                 }
             }

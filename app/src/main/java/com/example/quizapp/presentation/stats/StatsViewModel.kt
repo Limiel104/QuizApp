@@ -1,5 +1,6 @@
 package com.example.quizapp.presentation.stats
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -8,6 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.quizapp.domain.use_case.QuizUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,11 +34,28 @@ class StatsViewModel @Inject constructor(
 
     private fun getStats(category: String) {
         viewModelScope.launch {
-            quizUseCases.getStatsUseCase(category).collect { results ->
+            quizUseCases.getResultsUseCase(category).collect { results ->
                 _statsListState.value = statsListState.value.copy(
                     statsList = results
                 )
             }
         }
+    }
+
+    fun setTime(time: Int): String {
+        val minutes = time/60
+        val seconds = time - (minutes*60)
+
+        return if (seconds < 10) {
+            "$minutes:0$seconds"
+        } else {
+            "$minutes:$seconds"
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun setDate(date: Long): String {
+        val simpleDate = SimpleDateFormat("yyyy-MM-dd")
+        return simpleDate.format(Date(date))
     }
 }
