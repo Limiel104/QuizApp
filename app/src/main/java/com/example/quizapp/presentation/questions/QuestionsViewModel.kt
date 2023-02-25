@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.quizapp.domain.model.Result
 import com.example.quizapp.domain.use_case.QuizUseCases
 import com.example.quizapp.ui.theme.Green
 import com.example.quizapp.ui.theme.OffBlack
@@ -55,21 +56,11 @@ class QuestionsViewModel @Inject constructor(
     fun onEvent(event: QuestionsEvent) {
         when(event) {
             is QuestionsEvent.SelectedAnswer -> {
-                setAnswersColors(event.value)
-                setResult(event.value)
-                Timer().schedule(700) {
-                    Log.i("TAG DELAY","0.7s")
-                    val wasLastQuestionAnswered = _displayedQuestionState.value.counter == QUESTIONS_NUMBER
-
-                    if(wasLastQuestionAnswered) {
-                        Log.i("TAG","LAST QUESTION WAS DISPLAYED")
-                        Log.i("TAG RESULT",_displayedQuestionState.value.result.toString())
-                        stopTimer()
-                    }
-                    else {
-                        val nextQuestionNumber = _displayedQuestionState.value.counter + 1
-                        setDisplayedQuestion(nextQuestionNumber)
-                    }
+                if(!_displayedQuestionState.value.isButtonLocked) {
+                    preventMultiClick(true)
+                    setAnswersColors(event.value)
+                    setResult(event.value)
+                    prepareNextQuestionOrFinishQuiz()
                 }
             }
             is QuestionsEvent.TimeDisplayedChange -> {
@@ -211,6 +202,45 @@ class QuestionsViewModel @Inject constructor(
 
         _timerState.value = timerState.value.copy(
             displayedTime = timeToDisplay
+        )
+    }
+
+    private fun addResultToDb() {
+        viewModelScope.launch {
+            quizUseCases.addResultUseCase(
+                Result(
+                    score = _displayedQuestionState.value.result,
+                    category = _questionListState.value.category,
+                    difficulty = _questionListState.value.difficulty,
+                    time = _timerState.value.currentTimeInSeconds,
+                    date = System.currentTimeMillis()
+                )
+            )
+        }
+    }
+
+    private fun prepareNextQuestionOrFinishQuiz() {
+        Timer().schedule(700) {
+            Log.i("TAG DELAY","0.7s")
+            val wasLastQuestionAnswered = _displayedQuestionState.value.counter == QUESTIONS_NUMBER
+
+            if(wasLastQuestionAnswered) {
+                Log.i("TAG","LAST QUESTION WAS DISPLAYED")
+                Log.i("TAG RESULT",_displayedQuestionState.value.result.toString())
+                stopTimer()
+                addResultToDb()
+            }
+            else {
+                val nextQuestionNumber = _displayedQuestionState.value.counter + 1
+                setDisplayedQuestion(nextQuestionNumber)
+                preventMultiClick(false)
+            }
+        }
+    }
+
+    private fun preventMultiClick(isButtonLocked: Boolean) {
+        _displayedQuestionState.value = displayedQuestionState.value.copy(
+            isButtonLocked = isButtonLocked
         )
     }
 }

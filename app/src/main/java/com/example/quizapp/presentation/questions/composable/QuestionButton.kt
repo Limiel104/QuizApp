@@ -17,48 +17,32 @@ import com.example.quizapp.ui.theme.OffBlack
 fun QuestionButton(
     text: String,
     color: Color,
+    isButtonLocked: Boolean,
     onClick: (String) -> Unit
 ) {
-    if(color != OffBlack) {
-        OutlinedButton(
-            colors = ButtonDefaults.buttonColors(color),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    horizontal = 25.dp,
-                    vertical = 9.dp
-                ),
-            border = BorderStroke(1.dp, color),
-            shape = RoundedCornerShape(35.dp),
-            onClick = { onClick(text) }
-        ) {
-            Text(
-                text = text,
-                color = Color.White,
-                modifier = Modifier
-                    .padding(7.dp)
-            )
+    OutlinedButton(
+        colors = if (color != OffBlack) ButtonDefaults.buttonColors(color) else ButtonDefaults.buttonColors(
+            Color.White
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = 25.dp,
+                vertical = 9.dp
+            ),
+        border = BorderStroke(1.dp, color),
+        shape = RoundedCornerShape(35.dp),
+        onClick = {
+            if (!isButtonLocked) {
+                onClick(text)
+            }
         }
-    }
-    else {
-        OutlinedButton(
-            colors = ButtonDefaults.buttonColors(Color.White),
+    ) {
+        Text(
+            text = text,
+            color = if (color != OffBlack) Color.White else color,
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    horizontal = 25.dp,
-                    vertical = 9.dp
-                ),
-            border = BorderStroke(1.dp, color),
-            shape = RoundedCornerShape(35.dp),
-            onClick = { onClick(text) }
-        ) {
-            Text(
-                text = text,
-                color = color,
-                modifier = Modifier
-                    .padding(7.dp)
-            )
-        }
+                .padding(7.dp)
+        )
     }
 }

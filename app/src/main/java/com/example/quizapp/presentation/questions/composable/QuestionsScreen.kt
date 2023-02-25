@@ -28,6 +28,7 @@ fun QuestionsScreen(
     val currentTime = viewModel.timerState.value.currentTimeInSeconds
     val isTimerRunning = viewModel.timerState.value.isTimerRunning
     val result = viewModel.displayedQuestionState.value.result
+    val isButtonLocked = viewModel.displayedQuestionState.value.isButtonLocked
 
     LaunchedEffect(key1 = isTimerRunning, key2 = currentTime) {
         if(isTimerRunning) {
@@ -65,6 +66,7 @@ fun QuestionsScreen(
                 QuestionButton(
                     text = answersState[0],
                     color = answersColorState[0],
+                    isButtonLocked = isButtonLocked,
                     onClick = {
                         viewModel.onEvent(QuestionsEvent.SelectedAnswer(answersState[0]))
                     }
@@ -73,6 +75,7 @@ fun QuestionsScreen(
                 QuestionButton(
                     text = answersState[1],
                     color = answersColorState[1],
+                    isButtonLocked = isButtonLocked,
                     onClick = {
                         viewModel.onEvent(QuestionsEvent.SelectedAnswer(answersState[1]))
                     }
@@ -81,6 +84,7 @@ fun QuestionsScreen(
                 QuestionButton(
                     text = answersState[2],
                     color = answersColorState[2],
+                    isButtonLocked = isButtonLocked,
                     onClick = {
                         viewModel.onEvent(QuestionsEvent.SelectedAnswer(answersState[2]))
                     }
@@ -89,6 +93,7 @@ fun QuestionsScreen(
                 QuestionButton(
                     text = answersState[3],
                     color = answersColorState[3],
+                    isButtonLocked = isButtonLocked,
                     onClick = {
                         viewModel.onEvent(QuestionsEvent.SelectedAnswer(answersState[3]))
                     }

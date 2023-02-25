@@ -11,5 +11,5 @@ data class ResultEntity(
     val time: Int,
     val date: Long,
     @PrimaryKey
-    val id: Int
+    val id: Int? = null
 )

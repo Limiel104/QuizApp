@@ -9,5 +9,6 @@ data class DisplayedQuestionState(
     val answersColors: List<Color> = listOf(OffBlack,OffBlack,OffBlack,OffBlack),
     val correctAnswer: String = "",
     val counter: Int = 0,
-    val result: Int = 0
+    val result: Int = 0,
+    val isButtonLocked: Boolean = false
 )

@@ -8,10 +8,7 @@ import com.example.quizapp.data.repository.QuestionRepositoryImpl
 import com.example.quizapp.data.repository.ResultRepositoryImpl
 import com.example.quizapp.domain.repository.QuestionRepository
 import com.example.quizapp.domain.repository.ResultRepository
-import com.example.quizapp.domain.use_case.AddQuestionToDbUseCase
-import com.example.quizapp.domain.use_case.GetQuestionsFromApiUseCase
-import com.example.quizapp.domain.use_case.GetQuestionsFromDbUseCase
-import com.example.quizapp.domain.use_case.QuizUseCases
+import com.example.quizapp.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,11 +56,12 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideQuizUseCases(repository: QuestionRepository): QuizUseCases {
+    fun provideQuizUseCases(questionRepository: QuestionRepository, resultRepository: ResultRepository): QuizUseCases {
         return QuizUseCases(
-            getQuestionsFromApiUseCase = GetQuestionsFromApiUseCase(repository),
-            getQuestionsFromDbUseCase = GetQuestionsFromDbUseCase(repository),
-            addQuestionToDbUseCase = AddQuestionToDbUseCase(repository)
+            getQuestionsFromApiUseCase = GetQuestionsFromApiUseCase(questionRepository),
+            getQuestionsFromDbUseCase = GetQuestionsFromDbUseCase(questionRepository),
+            addQuestionToDbUseCase = AddQuestionToDbUseCase(questionRepository),
+            addResultUseCase = AddResultUseCase(resultRepository)
         )
     }
 }
