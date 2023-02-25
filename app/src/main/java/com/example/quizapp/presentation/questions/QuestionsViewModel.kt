@@ -88,6 +88,10 @@ class QuestionsViewModel @Inject constructor(
             if(_questionListState.value.questionList.isEmpty()) {
                 getQuestionsFromDb(category, difficulty)
             }
+            else {
+                quizUseCases.addQuestionToDbUseCase(_questionListState.value.questionList)
+                Log.i("TAG VM LOCAL SAVE", _questionListState.value.questionList.toString())
+            }
             val questionNumber = 1
             setDisplayedQuestion(questionNumber)
         }

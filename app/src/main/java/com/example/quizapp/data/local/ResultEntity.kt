@@ -1,7 +1,9 @@
 package com.example.quizapp.data.local
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@Entity
 data class ResultEntity(
     val score: Int,
     val category: String,

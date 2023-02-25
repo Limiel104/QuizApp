@@ -4,10 +4,11 @@ import android.app.Application
 import androidx.room.Room
 import com.example.quizapp.data.local.QuizDatabase
 import com.example.quizapp.data.remote.TriviaApi
-import com.example.quizapp.data.repository.QuizRepositoryImpl
+import com.example.quizapp.data.repository.QuestionRepositoryImpl
 import com.example.quizapp.data.repository.ResultRepositoryImpl
-import com.example.quizapp.domain.repository.QuizRepository
+import com.example.quizapp.domain.repository.QuestionRepository
 import com.example.quizapp.domain.repository.ResultRepository
+import com.example.quizapp.domain.use_case.AddQuestionToDbUseCase
 import com.example.quizapp.domain.use_case.GetQuestionsFromApiUseCase
 import com.example.quizapp.domain.use_case.GetQuestionsFromDbUseCase
 import com.example.quizapp.domain.use_case.QuizUseCases
@@ -46,8 +47,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideQuizRepository(api: TriviaApi, db: QuizDatabase): QuizRepository {
-        return QuizRepositoryImpl(api,db.quizDao)
+    fun provideQuestionRepository(api: TriviaApi, db: QuizDatabase): QuestionRepository {
+        return QuestionRepositoryImpl(api,db.questionDao)
     }
 
     @Provides
@@ -58,10 +59,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideQuizUseCases(repository: QuizRepository): QuizUseCases {
+    fun provideQuizUseCases(repository: QuestionRepository): QuizUseCases {
         return QuizUseCases(
             getQuestionsFromApiUseCase = GetQuestionsFromApiUseCase(repository),
-            getQuestionsFromDbUseCase = GetQuestionsFromDbUseCase(repository)
+            getQuestionsFromDbUseCase = GetQuestionsFromDbUseCase(repository),
+            addQuestionToDbUseCase = AddQuestionToDbUseCase(repository)
         )
     }
 }

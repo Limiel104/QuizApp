@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
 )
 abstract class QuizDatabase: RoomDatabase() {
 
-    abstract val quizDao: QuizDao
+    abstract val questionDao: QuestionDao
     abstract val resultDao: ResultDao
 
     companion object {
