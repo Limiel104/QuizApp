@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">QuizApp</string>
+
+    <string name="choose_difficulty_level">"Choose difficulty level"</string>
+    <string name="icon">Icon</string>
+    <string name="choose_category">"Choose category"</string>
+    <string name="question">Question\u0020</string>
+    <string name="best_scores">Best 20 Scores</string>
+    <string name="quiz_results">Quiz Results</string>
+    <string name="percent">%</string>
+    <string name="accuracy">Accuracy</string>
+    <string name="time">Time</string>
+    <string name="correct">Correct</string>
+    <string name="incorrect">Incorrect</string>
+    <string name="score">Score</string>
+    <string name="see_best_scores">"See best scores for this category"</string>
+    <string name="go_back">Go Back</string>
+
+    <string name="arts_label">Art &amp; Literature</string>
+    <string name="food_label">Food &amp; Drink</string>
+    <string name="geography_label">Geography</string>
+    <string name="music_label">Music</string>
+    <string name="society_label">Society &amp; Culture</string>
+    <string name="film_label">Film &amp; TV</string>
+    <string name="knowledge_label">General knowledge</string>
+    <string name="history_label">History</string>
+    <string name="science_label">Science</string>
+    <string name="sport_label">Sport &amp; Leisure</string>
+
+    <string name="easy_label">Easy</string>
+    <string name="medium_label">Medium</string>
+    <string name="hard_label">Hard</string>
 </resources>

@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.quizapp.R
 import com.example.quizapp.presentation.questions.QuestionsEvent
 import com.example.quizapp.presentation.questions.QuestionsViewModel
 import com.example.quizapp.ui.theme.LightGray3
@@ -60,7 +62,7 @@ fun QuestionsScreen(
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
             QuestionTitle(
-                number = "Question $counterState",
+                number = stringResource(id = R.string.question) + counterState,
                 question = questionState
             )
 

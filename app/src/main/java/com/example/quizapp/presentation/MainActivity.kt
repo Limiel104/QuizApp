@@ -41,22 +41,12 @@ class MainActivity : ComponentActivity() {
                             SelectCategoryScreen(navController = navController)
                         }
                         composable(
-                            route = Screen.SelectDifficultyScreen.route + "category={category}&label={label}&iconId={iconId}",
+                            route = Screen.SelectDifficultyScreen.route + "category={category}",
                             arguments = listOf(
                                 navArgument(
                                     name = "category"
                                 ) {
                                     type = NavType.StringType
-                                },
-                                navArgument(
-                                    name = "label"
-                                ) {
-                                    type = NavType.StringType
-                                },
-                                navArgument(
-                                    name = "iconId"
-                                ) {
-                                    type = NavType.IntType
                                 }
                             )
                         ) {
@@ -111,7 +101,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         ) {
-                            StatsScreen(navController = navController)
+                            StatsScreen()
                         }
                     }
                 }

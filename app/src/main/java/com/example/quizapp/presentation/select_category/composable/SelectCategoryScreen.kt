@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -15,6 +16,16 @@ import androidx.navigation.NavController
 import com.example.quizapp.R
 import com.example.quizapp.ui.theme.LightGray3
 import com.example.quizapp.ui.theme.OffBlack
+import com.example.quizapp.util.Constants.arts_category
+import com.example.quizapp.util.Constants.film_category
+import com.example.quizapp.util.Constants.food_category
+import com.example.quizapp.util.Constants.geography_category
+import com.example.quizapp.util.Constants.history_category
+import com.example.quizapp.util.Constants.knowledge_category
+import com.example.quizapp.util.Constants.music_category
+import com.example.quizapp.util.Constants.science_category
+import com.example.quizapp.util.Constants.society_category
+import com.example.quizapp.util.Constants.sport_category
 import com.example.quizapp.util.Screen
 
 @Composable
@@ -33,7 +44,7 @@ fun SelectCategoryScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Choose category",
+                text = stringResource(id = R.string.choose_category),
                 fontSize = 30.sp,
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.h1,
@@ -53,66 +64,56 @@ fun SelectCategoryScreen(
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
                 CategoryCard(
-                    categoryImageId = R.drawable.art,
-                    label = "Art & Literature",
+                    categoryImageId = R.drawable.arts,
+                    label = stringResource(id = R.string.arts_label),
                     modifier = Modifier.clickable {
                         navController.navigate(
                             Screen.SelectDifficultyScreen.route
-                                    + "category=arts_and_literature"
-                                    + "&label=Art & Literature"
-                                    + "&iconId=${R.drawable.art_big}"
+                                    + "category=$arts_category"
                         )
                     }
                 )
 
                 CategoryCard(
                     categoryImageId = R.drawable.food,
-                    label = "Food & Drink",
+                    label = stringResource(id = R.string.food_label),
                     modifier = Modifier.clickable {
                         navController.navigate(
                             Screen.SelectDifficultyScreen.route
-                                    + "category=food_and_drink"
-                                    + "&label=Food & Drink"
-                                    + "&iconId=${R.drawable.food_big}"
+                                    + "category=$food_category"
                         )
                     }
                 )
 
                 CategoryCard(
                     categoryImageId = R.drawable.geography,
-                    label = "Geography",
+                    label = stringResource(id = R.string.geography_label),
                     modifier = Modifier.clickable {
                         navController.navigate(
                             Screen.SelectDifficultyScreen.route
-                                    + "category=geography"
-                                    + "&label=Geography"
-                                    + "&iconId=${R.drawable.geography_big}"
+                                    + "category=$geography_category"
                         )
                     }
                 )
 
                 CategoryCard(
                     categoryImageId = R.drawable.music,
-                    label = "Music",
+                    label = stringResource(id = R.string.music_label),
                     modifier = Modifier.clickable {
                         navController.navigate(
                             Screen.SelectDifficultyScreen.route
-                                    + "category=music"
-                                    + "&label=Music"
-                                    + "&iconId=${R.drawable.music_big}"
+                                    + "category=$music_category"
                         )
                     }
                 )
 
                 CategoryCard(
                     categoryImageId = R.drawable.society,
-                    label = "Society & Culture",
+                    label = stringResource(id = R.string.society_label),
                     modifier = Modifier.clickable {
                         navController.navigate(
                             Screen.SelectDifficultyScreen.route
-                                    + "category=society_and_culture"
-                                    + "&label=Society & Culture"
-                                    + "&iconId=${R.drawable.society_big}"
+                                    + "category=$society_category"
                         )
                     }
                 )
@@ -126,65 +127,55 @@ fun SelectCategoryScreen(
             ) {
                 CategoryCard(
                     categoryImageId = R.drawable.film,
-                    label = "Film & TV",
+                    label = stringResource(id = R.string.film_label),
                     modifier = Modifier.clickable {
                         navController.navigate(
                             Screen.SelectDifficultyScreen.route
-                                    + "category=film_and_tv"
-                                    + "&label=Film & TV"
-                                    + "&iconId=${R.drawable.film_big}"
+                                    + "category=$film_category"
                         )
                     }
                 )
 
                 CategoryCard(
                     categoryImageId = R.drawable.knowledge,
-                    label = "General knowledge",
+                    label = stringResource(id = R.string.knowledge_label),
                     modifier = Modifier.clickable {
                         navController.navigate(
                             Screen.SelectDifficultyScreen.route
-                                    + "category=general_knowledge"
-                                    + "&label=General knowledge"
-                                    + "&iconId=${R.drawable.knowledge_big}"
+                                    + "category=$knowledge_category"
                         )
                     }
                 )
 
                 CategoryCard(
                     categoryImageId = R.drawable.history,
-                    label = "History",
+                    label = stringResource(id = R.string.history_label),
                     modifier = Modifier.clickable {
                         navController.navigate(
                             Screen.SelectDifficultyScreen.route
-                                    + "category=history"
-                                    + "&label=History"
-                                    + "&iconId=${R.drawable.history_big}"
+                                    + "category=$history_category"
                         )
                     }
                 )
 
                 CategoryCard(
                     categoryImageId = R.drawable.science,
-                    label = "Science",
+                    label = stringResource(id = R.string.science_label),
                     modifier = Modifier.clickable {
                         navController.navigate(
                             Screen.SelectDifficultyScreen.route
-                                    + "category=science"
-                                    + "&label=Science"
-                                    + "&iconId=${R.drawable.science_big}"
+                                    + "category=$science_category"
                         )
                     }
                 )
 
                 CategoryCard(
                     categoryImageId = R.drawable.sport,
-                    label = "Sport & Leisure",
+                    label = stringResource(id = R.string.sport_label),
                     modifier = Modifier.clickable {
                         navController.navigate(
                             Screen.SelectDifficultyScreen.route
-                                    + "category=sport_and_leisure"
-                                    + "&label=Sport & Leisure"
-                                    + "&iconId=${R.drawable.sport_big}"
+                                    + "category=$sport_category"
                         )
                     }
                 )

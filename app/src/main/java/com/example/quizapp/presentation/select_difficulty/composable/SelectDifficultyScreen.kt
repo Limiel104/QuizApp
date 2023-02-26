@@ -9,16 +9,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.quizapp.R
 import com.example.quizapp.presentation.common.composables.NavigationButton
 import com.example.quizapp.presentation.select_difficulty.SelectDifficultyViewModel
 import com.example.quizapp.ui.theme.LightGray3
 import com.example.quizapp.ui.theme.OffBlack
+import com.example.quizapp.util.Constants.easy_difficulty
+import com.example.quizapp.util.Constants.hard_difficulty
+import com.example.quizapp.util.Constants.medium_difficulty
 import com.example.quizapp.util.Screen
 
 @Composable
@@ -26,6 +31,10 @@ fun SelectDifficultyScreen(
     navController: NavController,
     viewModel: SelectDifficultyViewModel = hiltViewModel()
 ) {
+    val iconId = viewModel.state.value.iconId
+    val label = viewModel.state.value.label
+    val category = viewModel.state.value.category
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34,7 +43,7 @@ fun SelectDifficultyScreen(
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Text(
-            text = viewModel.state.value.label,
+            text = label,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 25.dp),
@@ -48,16 +57,16 @@ fun SelectDifficultyScreen(
 
         Image(
             painterResource(
-                id = viewModel.state.value.iconId
+                id = iconId
             ),
-            contentDescription = viewModel.state.value.label
+            contentDescription = stringResource(id = R.string.icon)
         )
 
         Spacer(modifier = Modifier.height(5.dp))
 
         Column() {
             Text(
-                text = "Choose difficulty level",
+                text = stringResource(id = R.string.choose_difficulty_level),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 25.dp),
@@ -69,34 +78,34 @@ fun SelectDifficultyScreen(
             Spacer(modifier = Modifier.height(10.dp))
 
             NavigationButton(
-                text = "Easy",
+                text = stringResource(id = R.string.easy_label),
                 onClick = {
                     navController.navigate(
                         Screen.QuestionsScreen.route
-                                + "category=${viewModel.state.value.selectedCategory}"
-                                + "&difficulty=easy"
+                                + "category=$category"
+                                + "&difficulty=$easy_difficulty"
                     )
                 }
             )
 
             NavigationButton(
-                text = "Medium",
+                text = stringResource(id = R.string.medium_label),
                 onClick = {
                     navController.navigate(
                         Screen.QuestionsScreen.route
-                                + "category=${viewModel.state.value.selectedCategory}"
-                                + "&difficulty=medium"
+                                + "category=$category"
+                                + "&difficulty=$medium_difficulty"
                     )
                 }
             )
 
             NavigationButton(
-                text = "Hard",
+                text = stringResource(id = R.string.hard_label),
                 onClick = {
                     navController.navigate(
                         Screen.QuestionsScreen.route
-                                + "category=${viewModel.state.value.selectedCategory}"
-                                + "&difficulty=hard"
+                                + "category=$category"
+                                + "&difficulty=$hard_difficulty"
                     )
                 }
             )

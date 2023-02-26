@@ -13,6 +13,25 @@ import com.example.quizapp.ui.theme.Green
 import com.example.quizapp.ui.theme.OffBlack
 import com.example.quizapp.ui.theme.Red
 import com.example.quizapp.util.Constants.QUESTIONS_NUMBER
+import com.example.quizapp.util.Constants.arts_category
+import com.example.quizapp.util.Constants.arts_label
+import com.example.quizapp.util.Constants.film_category
+import com.example.quizapp.util.Constants.film_label
+import com.example.quizapp.util.Constants.food_category
+import com.example.quizapp.util.Constants.food_label
+import com.example.quizapp.util.Constants.geography_category
+import com.example.quizapp.util.Constants.geography_label
+import com.example.quizapp.util.Constants.history_category
+import com.example.quizapp.util.Constants.history_label
+import com.example.quizapp.util.Constants.knowledge_category
+import com.example.quizapp.util.Constants.knowledge_label
+import com.example.quizapp.util.Constants.music_category
+import com.example.quizapp.util.Constants.music_label
+import com.example.quizapp.util.Constants.science_category
+import com.example.quizapp.util.Constants.science_label
+import com.example.quizapp.util.Constants.society_category
+import com.example.quizapp.util.Constants.society_label
+import com.example.quizapp.util.Constants.sport_label
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
@@ -47,7 +66,7 @@ class QuestionsViewModel @Inject constructor(
             )
         }
 
-        getQuestions(_questionListState.value.category, _questionListState.value.difficulty)
+        getQuestions()
         startTimer()
         setDisplayedTime(0)
     }
@@ -72,7 +91,10 @@ class QuestionsViewModel @Inject constructor(
         }
     }
 
-    private fun getQuestions(category: String, difficulty: String) {
+    private fun getQuestions(
+        category: String = _questionListState.value.category,
+        difficulty: String = _questionListState.value.difficulty
+    ) {
         viewModelScope.launch {
             getQuestionsFromApi(category, difficulty)
             if(_questionListState.value.questionList.isEmpty()) {
@@ -107,16 +129,16 @@ class QuestionsViewModel @Inject constructor(
 
     private fun getCategoryEntity(category: String): String {
         return when (category) {
-            "arts_and_literature" -> "Art & Literature"
-            "film_and_tv" -> "Film & TV"
-            "food_and_drink" -> "Food & Drink"
-            "general_knowledge" -> "General Knowledge"
-            "geography" -> "Geography"
-            "history" -> "History"
-            "music" -> "Music"
-            "science" -> "Science"
-            "society_and_culture" -> "Society & Culture"
-            else -> "Sport & Leisure"
+            arts_category -> arts_label
+            food_category -> food_label
+            geography_category -> geography_label
+            music_category -> music_label
+            society_category -> society_label
+            film_category -> film_label
+            knowledge_category -> knowledge_label
+            history_category -> history_label
+            science_category -> science_label
+            else -> sport_label
         }
     }
 
@@ -134,7 +156,7 @@ class QuestionsViewModel @Inject constructor(
     }
 
     private fun setAnswersColors(answer: String) {
-        var colorList: List<Color> = emptyList()
+        val colorList = mutableListOf<Color>()
 
         if(answer == _displayedQuestionState.value.correctAnswer) {
             val index = _displayedQuestionState.value.answers.indexOf(answer)
@@ -191,9 +213,8 @@ class QuestionsViewModel @Inject constructor(
     private fun setDisplayedTime(currentTimeInSeconds: Int) {
         val minutes = currentTimeInSeconds/60
         val seconds = currentTimeInSeconds - (minutes*60)
-        var timeToDisplay = ""
 
-        timeToDisplay = if(seconds<10) {
+        val timeToDisplay = if(seconds<10) {
             "$minutes:0$seconds"
         } else {
             "$minutes:$seconds"

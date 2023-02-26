@@ -6,12 +6,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.quizapp.R
 import com.example.quizapp.presentation.common.composables.NavigationButton
 import com.example.quizapp.presentation.results.ResultsViewModel
 import com.example.quizapp.ui.theme.Green
@@ -41,7 +43,7 @@ fun ResultsScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Quiz Results",
+            text = stringResource(id = R.string.quiz_results),
             modifier = Modifier
                 .fillMaxWidth(),
             color = OffBlack,
@@ -56,8 +58,8 @@ fun ResultsScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             ResultCard(
-                result = "$accuracy%",
-                title = "Accuracy",
+                result = accuracy + stringResource(id = R.string.percent),
+                title = stringResource(id = R.string.accuracy),
                 resultColor = OffBlack,
                 height = 100,
                 width = 135,
@@ -68,7 +70,7 @@ fun ResultsScreen(
 
             ResultCard(
                 result = time,
-                title = "Time",
+                title = stringResource(id = R.string.time),
                 resultColor = OffBlack,
                 height = 100,
                 width = 135,
@@ -83,7 +85,7 @@ fun ResultsScreen(
         ) {
             ResultCard(
                 result = correctAnswers,
-                title = "Correct",
+                title = stringResource(id = R.string.correct),
                 resultColor = Green,
                 height = 100,
                 width = 135,
@@ -94,7 +96,7 @@ fun ResultsScreen(
 
             ResultCard(
                 result = incorrectAnswers,
-                title = "Incorrect",
+                title = stringResource(id = R.string.incorrect),
                 resultColor = Red,
                 height = 100,
                 width = 135,
@@ -104,7 +106,7 @@ fun ResultsScreen(
 
         ResultCard(
             result = rating,
-            title = "Score",
+            title = stringResource(id = R.string.score),
             resultColor = ratingColor,
             height = 100,
             width = 280,
@@ -113,7 +115,7 @@ fun ResultsScreen(
 
         Column() {
             NavigationButton(
-                text = "See best scores for this category",
+                text = stringResource(id = R.string.see_best_scores),
                 onClick = {
                     navController.navigate(
                         Screen.StatsScreen.route
@@ -123,7 +125,7 @@ fun ResultsScreen(
             )
 
             NavigationButton(
-                text = "Go Back",
+                text = stringResource(id = R.string.go_back),
                 onClick = {
                     navController.popBackStack(Screen.SelectCategoryScreen.route, false)
                 }

@@ -9,19 +9,25 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
+import com.example.quizapp.R
 import com.example.quizapp.presentation.stats.StatsEvent
 import com.example.quizapp.presentation.stats.StatsViewModel
 import com.example.quizapp.ui.theme.LightGray3
 import com.example.quizapp.ui.theme.OffBlack
+import com.example.quizapp.util.Constants.easy_difficulty
+import com.example.quizapp.util.Constants.easy_label
+import com.example.quizapp.util.Constants.hard_difficulty
+import com.example.quizapp.util.Constants.hard_label
+import com.example.quizapp.util.Constants.medium_difficulty
+import com.example.quizapp.util.Constants.medium_label
 
 @Composable
 fun StatsScreen(
-    navController: NavController,
     viewModel: StatsViewModel = hiltViewModel()
 ) {
     val statsList = viewModel.statsListState.value.statsList
@@ -39,7 +45,7 @@ fun StatsScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Best 20 Scores",
+                text = stringResource(id = R.string.best_scores),
                 fontSize = 30.sp,
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.h1,
@@ -55,26 +61,26 @@ fun StatsScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             ChipItem(
-                text = "Easy",
-                isSelected = query == "easy",
+                text = easy_label,
+                isSelected = query == easy_difficulty,
                 onClick = {
-                    viewModel.onEvent(StatsEvent.OnChipToggled("easy"))
+                    viewModel.onEvent(StatsEvent.OnChipToggled(easy_difficulty))
                 }
             )
 
             ChipItem(
-                text = "Medium",
-                isSelected = query == "medium",
+                text = medium_label,
+                isSelected = query == medium_difficulty,
                 onClick = {
-                    viewModel.onEvent(StatsEvent.OnChipToggled("medium"))
+                    viewModel.onEvent(StatsEvent.OnChipToggled(medium_difficulty))
                 }
             )
 
             ChipItem(
-                text = "Hard",
-                isSelected = query == "hard",
+                text = hard_label,
+                isSelected = query == hard_difficulty,
                 onClick = {
-                    viewModel.onEvent(StatsEvent.OnChipToggled("hard"))
+                    viewModel.onEvent(StatsEvent.OnChipToggled(hard_difficulty))
                 }
             )
         }

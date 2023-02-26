@@ -4,18 +4,23 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.quizapp.domain.use_case.QuizUseCases
 import com.example.quizapp.ui.theme.Green
 import com.example.quizapp.ui.theme.Red
 import com.example.quizapp.ui.theme.Yellow
 import com.example.quizapp.util.Constants.QUESTIONS_NUMBER
+import com.example.quizapp.util.Constants.average
+import com.example.quizapp.util.Constants.bad
+import com.example.quizapp.util.Constants.good
+import com.example.quizapp.util.Constants.great
+import com.example.quizapp.util.Constants.ok
+import com.example.quizapp.util.Constants.perfect
+import com.example.quizapp.util.Constants.very_good
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.text.DecimalFormat
 import javax.inject.Inject
 
 @HiltViewModel
 class ResultsViewModel @Inject constructor(
-    private val quizUseCases: QuizUseCases,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
@@ -39,13 +44,13 @@ class ResultsViewModel @Inject constructor(
 
     private fun calculateResults(correctAnswers: Int) {
         val rating = when(correctAnswers) {
-            20 -> "Perfect"
-            18,19 -> "Great"
-            16,17 -> "Very Good"
-            14,15 -> "Good"
-            in 10..13 -> "Average"
-            in 6..9 -> "OK"
-            else -> "Bad"
+            20 -> perfect
+            18,19 -> great
+            16,17 -> very_good
+            14,15 -> good
+            in 10..13 -> average
+            in 6..9 -> ok
+            else -> bad
         }
 
         val color = when(correctAnswers) {
@@ -72,9 +77,8 @@ class ResultsViewModel @Inject constructor(
     private fun setTime(currentTimeInSeconds: Int) {
         val minutes = currentTimeInSeconds/60
         val seconds = currentTimeInSeconds - (minutes*60)
-        var timeToDisplay = ""
 
-        timeToDisplay = if(seconds<10) {
+        val timeToDisplay = if(seconds<10) {
             "$minutes:0$seconds"
         } else {
             "$minutes:$seconds"
