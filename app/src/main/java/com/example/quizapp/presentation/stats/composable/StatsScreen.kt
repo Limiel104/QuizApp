@@ -7,12 +7,14 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.quizapp.presentation.stats.StatsEvent
 import com.example.quizapp.presentation.stats.StatsViewModel
 import com.example.quizapp.ui.theme.LightGray3
 import com.example.quizapp.ui.theme.OffBlack
@@ -23,6 +25,7 @@ fun StatsScreen(
     viewModel: StatsViewModel = hiltViewModel()
 ) {
     val statsList = viewModel.statsListState.value.statsList
+    val query = viewModel.statsListState.value.query
 
     Column(
         modifier = Modifier
@@ -44,9 +47,42 @@ fun StatsScreen(
             )
         }
 
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 5.dp, bottom = 15.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            ChipItem(
+                text = "Easy",
+                isSelected = query == "easy",
+                onClick = {
+                    viewModel.onEvent(StatsEvent.OnChipToggled("easy"))
+                }
+            )
+
+            ChipItem(
+                text = "Medium",
+                isSelected = query == "medium",
+                onClick = {
+                    viewModel.onEvent(StatsEvent.OnChipToggled("medium"))
+                }
+            )
+
+            ChipItem(
+                text = "Hard",
+                isSelected = query == "hard",
+                onClick = {
+                    viewModel.onEvent(StatsEvent.OnChipToggled("hard"))
+                }
+            )
+        }
+
         Column(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(bottom = 10.dp),
         ) {
             LazyColumn(
                 modifier = Modifier

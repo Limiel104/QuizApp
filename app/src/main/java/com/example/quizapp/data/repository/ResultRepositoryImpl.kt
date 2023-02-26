@@ -14,8 +14,9 @@ class ResultRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getResults(
-        category: String
+        category: String,
+        query: String
     ): List<ResultEntity> {
-        return dao.getResults(category)
+        return dao.getResults(category,query)
     }
 }

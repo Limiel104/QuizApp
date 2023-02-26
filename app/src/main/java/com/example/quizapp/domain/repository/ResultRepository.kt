@@ -7,6 +7,7 @@ interface ResultRepository {
     suspend fun insertResult(resultEntity: ResultEntity)
 
     suspend fun getResults(
-        category: String
+        category: String,
+        query: String
     ): List<ResultEntity>
 }

@@ -11,11 +11,17 @@ import kotlinx.coroutines.flow.flow
 class GetResultsUseCase @Inject constructor(
     private val resultRepository: ResultRepository
 ) {
-    operator fun invoke(category: String): Flow<List<Result>> = flow {
-        val results = resultRepository.getResults(category)
+    operator fun invoke(
+        category: String,
+        query: String
+    ): Flow<List<Result>> = flow {
+        val results = resultRepository.getResults(category, query)
         Log.i("TAG LOCAL R",results.toString())
         if(results.isNotEmpty()) {
             emit(results.map { it.toResult() })
+        }
+        else {
+            emit(emptyList())
         }
     }
 }

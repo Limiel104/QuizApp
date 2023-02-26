@@ -18,11 +18,13 @@ interface ResultDao {
             SELECT *
             FROM resultEntity
             WHERE category = :category
+            AND difficulty LIKE '%' || :query || '%'
             ORDER BY score DESC
             LIMIT 20
         """
     )
     suspend fun getResults(
-        category: String
+        category: String,
+        query: String
     ): List<ResultEntity>
 }

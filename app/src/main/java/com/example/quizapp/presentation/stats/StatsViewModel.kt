@@ -1,6 +1,7 @@
 package com.example.quizapp.presentation.stats
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.quizapp.domain.use_case.QuizUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,6 +24,8 @@ class StatsViewModel @Inject constructor(
     private val _statsListState = mutableStateOf(StatsListState())
     val statsListState: State<StatsListState> = _statsListState
 
+    private var getStatsListJob: Job? = null
+
     init {
         savedStateHandle.get<String>("category")?.let { category ->
             _statsListState.value = statsListState.value.copy(
@@ -29,12 +33,37 @@ class StatsViewModel @Inject constructor(
             )
         }
 
-        getStats(_statsListState.value.category)
+        getStats()
     }
 
-    private fun getStats(category: String) {
-        viewModelScope.launch {
-            quizUseCases.getResultsUseCase(category).collect { results ->
+    fun onEvent(event: StatsEvent) {
+        when(event) {
+            is StatsEvent.OnChipToggled -> {
+                val isChipUnselected = event.value == _statsListState.value.query
+                if(isChipUnselected) {
+                    _statsListState.value = statsListState.value.copy(
+                        query = ""
+                    )
+                    Log.i("TAG s VM",_statsListState.value.query)
+                }
+                else {
+                    _statsListState.value = statsListState.value.copy(
+                        query = event.value
+                    )
+                    Log.i("TAG s VM",_statsListState.value.query)
+                }
+                getStats()
+            }
+        }
+    }
+
+    private fun getStats(
+        category: String = _statsListState.value.category,
+        query: String = _statsListState.value.query
+    ) {
+        getStatsListJob?.cancel()
+        getStatsListJob = viewModelScope.launch {
+            quizUseCases.getResultsUseCase(category,query).collect { results ->
                 _statsListState.value = statsListState.value.copy(
                     statsList = results
                 )

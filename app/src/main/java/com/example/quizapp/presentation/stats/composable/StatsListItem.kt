@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.quizapp.ui.theme.LightGreen
+import com.example.quizapp.ui.theme.LightGray4
 
 @Composable
 fun StatsListItem(
@@ -32,7 +32,7 @@ fun StatsListItem(
             text = score,
             height = 50,
             width = 50,
-            color = LightGreen
+            color = LightGray4
         )
 
         StatItem(
@@ -46,7 +46,7 @@ fun StatsListItem(
             text = difficulty,
             height = 50,
             width = 90,
-            color = LightGreen
+            color = LightGray4
         )
     }
 }
