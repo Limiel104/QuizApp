@@ -53,6 +53,9 @@ class QuestionsViewModel @Inject constructor(
     private val _timerState = mutableStateOf(TimerState())
     val timerState: State<TimerState> = _timerState
 
+    private val _dialogState = mutableStateOf(DialogState())
+    val dialogState: State<DialogState> = _dialogState
+
     init {
         savedStateHandle.get<String>("category")?.let { category ->
             _questionListState.value = questionListState.value.copy(
@@ -88,6 +91,11 @@ class QuestionsViewModel @Inject constructor(
                 )
                 setDisplayedTime(currentTimeInSeconds)
             }
+            is QuestionsEvent.DialogDismissed -> {
+                _dialogState.value = dialogState.value.copy(
+                    isDialogDismissed = true
+                )
+            }
         }
     }
 
@@ -95,17 +103,23 @@ class QuestionsViewModel @Inject constructor(
         category: String = _questionListState.value.category,
         difficulty: String = _questionListState.value.difficulty
     ) {
+        val questionNumber = 1
         viewModelScope.launch {
             getQuestionsFromApi(category, difficulty)
             if(_questionListState.value.questionList.isEmpty()) {
                 getQuestionsFromDb(category, difficulty)
+                if(_questionListState.value.questionList.isEmpty()) {
+                    activateNoQuestionsDialogAndStopTimer()
+                }
+                else {
+                    setDisplayedQuestion(questionNumber)
+                }
             }
             else {
                 quizUseCases.addQuestionToDbUseCase(_questionListState.value.questionList)
                 Log.i("TAG VM LOCAL SAVE", _questionListState.value.questionList.toString())
+                setDisplayedQuestion(questionNumber)
             }
-            val questionNumber = 1
-            setDisplayedQuestion(questionNumber)
         }
     }
 
@@ -125,6 +139,15 @@ class QuestionsViewModel @Inject constructor(
             )
             Log.i("TAG VM LOCAL", _questionListState.value.questionList.toString())
         }
+    }
+
+    private fun activateNoQuestionsDialogAndStopTimer() {
+        _dialogState.value = dialogState.value.copy(
+            isDialogActivated = true
+        )
+        _timerState.value = timerState.value.copy(
+            isTimerRunning = false
+        )
     }
 
     private fun getCategoryEntity(category: String): String {

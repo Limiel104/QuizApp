@@ -32,19 +32,27 @@ fun QuestionsScreen(
     val result = viewModel.displayedQuestionState.value.result
     val isButtonLocked = viewModel.displayedQuestionState.value.isButtonLocked
     val category = viewModel.questionListState.value.category
+    val isDialogActivated = viewModel.dialogState.value.isDialogActivated
+    val isDialogDismissed = viewModel.dialogState.value.isDialogDismissed
 
     LaunchedEffect(key1 = isTimerRunning, key2 = currentTime) {
         if(isTimerRunning) {
             delay(1000L)
             viewModel.onEvent(QuestionsEvent.TimeDisplayedChange(currentTime))
         }
-        else {
+        else if(!isDialogActivated) {
             navController.navigate(
                 Screen.ResultsScreen.route
                         + "result=$result"
                         + "&time=$currentTime"
                         + "&category=$category"
             )
+        }
+    }
+
+    LaunchedEffect(key1 = isDialogDismissed) {
+        if(isDialogActivated) {
+            navController.popBackStack()
         }
     }
 
@@ -56,6 +64,14 @@ fun QuestionsScreen(
         Timer(
             time = time
         )
+
+        if(isDialogActivated) {
+            NoQuestionsDialog(
+                onDismiss = {
+                    viewModel.onEvent(QuestionsEvent.DialogDismissed)
+                }
+            )
+        }
 
         Column(
             modifier = Modifier.fillMaxSize(),
