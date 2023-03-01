@@ -1,8 +1,16 @@
 package com.example.quizapp.domain.use_case
 
 import com.example.quizapp.data.local.QuestionEntity
-import com.example.quizapp.data.repository.FakeQuizRepository
+import com.example.quizapp.data.repository.FakeQuestionRepository
 import com.example.quizapp.domain.model.Question
+import com.example.quizapp.util.Constants.QUESTIONS_NUMBER
+import com.example.quizapp.util.Constants.easy_label
+import com.example.quizapp.util.Constants.geography_label
+import com.example.quizapp.util.Constants.hard_label
+import com.example.quizapp.util.Constants.history_label
+import com.example.quizapp.util.Constants.knowledge_label
+import com.example.quizapp.util.Constants.medium_label
+import com.example.quizapp.util.Constants.society_label
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -12,71 +20,71 @@ import org.junit.Test
 class GetQuestionsFromDbUseCaseTest {
 
     private lateinit var getQuestionsFromDbUseCase: GetQuestionsFromDbUseCase
-    private lateinit var fakeQuizRepository: FakeQuizRepository
+    private lateinit var fakeQuizRepository: FakeQuestionRepository
 
     @Before
     fun setUp() {
-        fakeQuizRepository = FakeQuizRepository()
+        fakeQuizRepository = FakeQuestionRepository()
         getQuestionsFromDbUseCase = GetQuestionsFromDbUseCase(fakeQuizRepository)
 
         val questionsToInsert = mutableListOf<QuestionEntity>()
 
-        for(i in 0..5) {
+        for(i in 0..QUESTIONS_NUMBER) {
             questionsToInsert.add(
                 QuestionEntity(
                     id = i.toString(),
-                    category = "Geography",
+                    category = geography_label,
                     correctAnswer = "Correct",
                     incorrectAnswer1 = "Incorrect1",
                     incorrectAnswer2 = "Incorrect2",
                     incorrectAnswer3 = "Incorrect3",
                     question = "Question $i",
-                    difficulty = "Easy",
+                    difficulty = easy_label,
                 )
             )
         }
 
-        for(i in 6..10) {
+        for(i in QUESTIONS_NUMBER+1..2*QUESTIONS_NUMBER) {
             questionsToInsert.add(
                 QuestionEntity(
                     id = i.toString(),
-                    category = "Society & Culture",
+                    category = society_label,
                     correctAnswer = "Correct",
                     incorrectAnswer1 = "Incorrect1",
                     incorrectAnswer2 = "Incorrect2",
                     incorrectAnswer3 = "Incorrect3",
                     question = "Question $i",
-                    difficulty = "Easy",
+                    difficulty = easy_label,
                 )
             )
         }
 
-        for(i in 11..15) {
+        for(i in 2*QUESTIONS_NUMBER+1..3*QUESTIONS_NUMBER) {
             questionsToInsert.add(
                 QuestionEntity(
                     id = i.toString(),
-                    category = "Society & Culture",
+                    category = society_label,
                     correctAnswer = "Correct",
                     incorrectAnswer1 = "Incorrect1",
                     incorrectAnswer2 = "Incorrect2",
                     incorrectAnswer3 = "Incorrect3",
                     question = "Question $i",
-                    difficulty = "Hard",
+                    difficulty = hard_label,
                 )
             )
         }
 
-        for(i in 16..20) {
+        for(i in 3*QUESTIONS_NUMBER+1..4*QUESTIONS_NUMBER) {
             questionsToInsert.add(
                 QuestionEntity(
                     id = i.toString(),
-                    category = "Geography",
+                    category = geography_label,
                     correctAnswer = "Correct",
                     incorrectAnswer1 = "Incorrect1",
                     incorrectAnswer2 = "Incorrect2",
                     incorrectAnswer3 = "Incorrect3",
                     question = "Question $i",
-                    difficulty = "Medium",
+                    difficulty = medium_label,
                 )
             )
         }
@@ -91,8 +99,8 @@ class GetQuestionsFromDbUseCaseTest {
     @Test
     fun returnListElementsAreOfTypeQuestion() = runBlocking {
         val questions = getQuestionsFromDbUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
@@ -103,84 +111,84 @@ class GetQuestionsFromDbUseCaseTest {
     @Test
     fun returnedQuestionsAreOfCorrectCategory() = runBlocking {
         val questions = getQuestionsFromDbUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.category).isEqualTo("Geography")
+            assertThat(question.category).isEqualTo(geography_label)
         }
     }
 
     @Test
     fun returnedQuestionsAreOfCorrectCategory_returnFalse() = runBlocking {
         val questions = getQuestionsFromDbUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.category).isNotEqualTo("General Knowledge")
+            assertThat(question.category).isNotEqualTo(knowledge_label)
         }
     }
 
     @Test
     fun returnedQuestionsAreOfCorrectDifficulty() = runBlocking {
         val questions = getQuestionsFromDbUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.difficulty).isEqualTo("Easy")
+            assertThat(question.difficulty).isEqualTo(easy_label)
         }
     }
 
     @Test
     fun returnedQuestionsAreOfCorrectDifficulty_returnFalse() = runBlocking {
         val questions = getQuestionsFromDbUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.difficulty).isNotEqualTo("Hard")
+            assertThat(question.difficulty).isNotEqualTo(hard_label)
         }
     }
 
     @Test
     fun returnedQuestionsAreOfCorrectCategoryAndDifficulty() = runBlocking {
         val questions = getQuestionsFromDbUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.category).isEqualTo("Geography")
-            assertThat(question.difficulty).isEqualTo("Easy")
+            assertThat(question.category).isEqualTo(geography_label)
+            assertThat(question.difficulty).isEqualTo(easy_label)
         }
     }
 
     @Test
     fun returnedQuestionsAreOfCorrectCategoryAndDifficulty_returnFalse() = runBlocking {
         val questions = getQuestionsFromDbUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.category).isNotEqualTo("History")
-            assertThat(question.difficulty).isNotEqualTo("Medium")
+            assertThat(question.category).isNotEqualTo(history_label)
+            assertThat(question.difficulty).isNotEqualTo(medium_label)
         }
     }
 
     @Test
     fun returnListIsOfCorrectSize() = runBlocking {
         val questions = getQuestionsFromDbUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
-        assertThat(questions.size).isEqualTo(7)
+        assertThat(questions.size).isEqualTo(QUESTIONS_NUMBER)
     }
 }

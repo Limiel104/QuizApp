@@ -1,6 +1,13 @@
 package com.example.quizapp.domain.use_case
 
-import com.example.quizapp.data.repository.FakeQuizRepository
+import com.example.quizapp.data.repository.FakeQuestionRepository
+import com.example.quizapp.util.Constants.QUESTIONS_NUMBER
+import com.example.quizapp.util.Constants.easy_label
+import com.example.quizapp.util.Constants.geography_label
+import com.example.quizapp.util.Constants.hard_label
+import com.example.quizapp.util.Constants.history_label
+import com.example.quizapp.util.Constants.knowledge_label
+import com.example.quizapp.util.Constants.medium_label
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -10,95 +17,95 @@ import org.junit.Test
 class GetQuestionsFromApiUseCaseTest {
 
     private lateinit var getQuestionsFromApiUseCase: GetQuestionsFromApiUseCase
-    private lateinit var fakeQuizRepository: FakeQuizRepository
+    private lateinit var fakeQuestionRepository: FakeQuestionRepository
 
     @Before
     fun setUp() {
-        fakeQuizRepository = FakeQuizRepository()
-        getQuestionsFromApiUseCase = GetQuestionsFromApiUseCase(fakeQuizRepository)
+        fakeQuestionRepository = FakeQuestionRepository()
+        getQuestionsFromApiUseCase = GetQuestionsFromApiUseCase(fakeQuestionRepository)
     }
 
     @Test
     fun returnedQuestionsAreOfCorrectCategory() = runBlocking {
         val questions = getQuestionsFromApiUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.category).isEqualTo("Geography")
+            assertThat(question.category).isEqualTo(geography_label)
         }
     }
 
     @Test
     fun returnedQuestionsAreOfCorrectCategory_returnFalse() = runBlocking {
         val questions = getQuestionsFromApiUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.category).isNotEqualTo("General Knowledge")
+            assertThat(question.category).isNotEqualTo(knowledge_label)
         }
     }
 
     @Test
     fun returnedQuestionsAreOfCorrectDifficulty() = runBlocking {
         val questions = getQuestionsFromApiUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.difficulty).isEqualTo("Easy")
+            assertThat(question.difficulty).isEqualTo(easy_label)
         }
     }
 
     @Test
     fun returnedQuestionsAreOfCorrectDifficulty_returnFalse() = runBlocking {
         val questions = getQuestionsFromApiUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.difficulty).isNotEqualTo("Hard")
+            assertThat(question.difficulty).isNotEqualTo(hard_label)
         }
     }
 
     @Test
     fun returnedQuestionsAreOfCorrectCategoryAndDifficulty() = runBlocking {
         val questions = getQuestionsFromApiUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.category).isEqualTo("Geography")
-            assertThat(question.difficulty).isEqualTo("Easy")
+            assertThat(question.category).isEqualTo(geography_label)
+            assertThat(question.difficulty).isEqualTo(easy_label)
         }
     }
 
     @Test
     fun returnedQuestionsAreOfCorrectCategoryAndDifficulty_returnFalse() = runBlocking {
         val questions = getQuestionsFromApiUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
         for(question in questions) {
-            assertThat(question.category).isNotEqualTo("History")
-            assertThat(question.difficulty).isNotEqualTo("Medium")
+            assertThat(question.category).isNotEqualTo(history_label)
+            assertThat(question.difficulty).isNotEqualTo(medium_label)
         }
     }
 
     @Test
     fun returnListIsOfCorrectSize() = runBlocking {
         val questions = getQuestionsFromApiUseCase(
-            category = "Geography",
-            difficulty = "Easy"
+            category = geography_label,
+            difficulty = easy_label
         ).first()
 
-        assertThat(questions.size).isEqualTo(7)
+        assertThat(questions.size).isEqualTo(QUESTIONS_NUMBER)
     }
 }
