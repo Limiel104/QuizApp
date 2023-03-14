@@ -1,33 +1,36 @@
 package com.example.quizapp.data.local
 
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.quizapp.di.AppModule
 import com.example.quizapp.util.Constants.easy_label
 import com.example.quizapp.util.Constants.geography_label
 import com.example.quizapp.util.Constants.hard_label
 import com.example.quizapp.util.Constants.history_label
 import com.example.quizapp.util.Constants.society_category
 import com.google.common.truth.Truth.assertThat
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
+import javax.inject.Inject
 
-@RunWith(AndroidJUnit4::class)
+@HiltAndroidTest
+@UninstallModules(AppModule::class)
 class QuestionDaoTest {
 
-    private lateinit var db: QuizDatabase
+    @get:Rule
+    val hiltRule = HiltAndroidRule(this)
+
+    @Inject
+    lateinit var db: QuizDatabase
     private lateinit var dao: QuestionDao
 
     @Before
     fun setUp() {
-        db = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            QuizDatabase::class.java
-        ).allowMainThreadQueries().build()
-
+        hiltRule.inject()
         dao = db.questionDao
     }
 
