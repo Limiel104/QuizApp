@@ -1,0 +1,397 @@
+[
+  {
+    "category": "Geography",
+    "id": "62602d104b176d54800e3c7c",
+    "correctAnswer": "Germany",
+    "incorrectAnswers": [
+      "Croatia",
+      "Albania",
+      "Switzerland"
+    ],
+    "question": "In which country is the city of Berlin?",
+    "tags": [
+      "cities",
+      "europe",
+      "general_knowledge",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "623b5794fd6c701a92118368",
+    "correctAnswer": "Athens",
+    "incorrectAnswers": [
+      "Jerusalem",
+      "Moscow",
+      "Venice"
+    ],
+    "question": "In which city would you find the Acropolis?",
+    "tags": [
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "623b57f0fd6c701a9211838a",
+    "correctAnswer": "Italy",
+    "incorrectAnswers": [
+      "Russia",
+      "New Zealand",
+      "France"
+    ],
+    "question": "In which country would you find the city of Rome?",
+    "tags": [
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "62602d474b176d54800e3c8c",
+    "correctAnswer": "Moscow",
+    "incorrectAnswers": [
+      "Zürich",
+      "Barcelona",
+      "Rotterdam"
+    ],
+    "question": "Which of these cities is in Russia?",
+    "tags": [
+      "cities",
+      "europe",
+      "russia",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "6233867462eaad73716a8cd4",
+    "correctAnswer": "India",
+    "incorrectAnswers": [
+      "Sri Lanka",
+      "Bangladesh",
+      "Nepal"
+    ],
+    "question": "Where is the Taj Mahal?",
+    "tags": [
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "622a1c357cc59eab6f950008",
+    "correctAnswer": "Rome",
+    "incorrectAnswers": [
+      "Milan",
+      "Naples",
+      "Florence"
+    ],
+    "question": "In which city is the colosseum located?",
+    "tags": [
+      "tourist_attractions",
+      "general_knowledge",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "623385db62eaad73716a8c99",
+    "correctAnswer": "The Amazon ",
+    "incorrectAnswers": [
+      "The Missouri",
+      "The Mississippi",
+      "The Rio Grande"
+    ],
+    "question": "What's the longest river in the Americas?",
+    "tags": [
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "62602d8c4b176d54800e3ca0",
+    "correctAnswer": "Buenos Aires",
+    "incorrectAnswers": [
+      "Fortaleza",
+      "Santiago",
+      "Monterrey"
+    ],
+    "question": "Which of these cities is in Argentina?",
+    "tags": [
+      "cities",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "622a1c357cc59eab6f94ff80",
+    "correctAnswer": "London",
+    "incorrectAnswers": [
+      "Cardiff",
+      "Edinburgh",
+      "Glasgow"
+    ],
+    "question": "What is the capital of the United Kingdom",
+    "tags": [
+      "capital_cities",
+      "general_knowledge",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "623741a0cb85f7ce9e949d79",
+    "correctAnswer": "Netherlands",
+    "incorrectAnswers": [
+      "Saint Lucia",
+      "Malaysia",
+      "Benin"
+    ],
+    "question": "Amsterdam is the capital city of which country?",
+    "tags": [
+      "cities",
+      "capital_cities",
+      "europe",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "62602d5f4b176d54800e3c93",
+    "correctAnswer": "Copenhagen",
+    "incorrectAnswers": [
+      "Milan",
+      "Athens",
+      "Munich"
+    ],
+    "question": "Which of these cities is in Denmark?",
+    "tags": [
+      "cities",
+      "europe",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "62602d994b176d54800e3ca4",
+    "correctAnswer": "Greece",
+    "incorrectAnswers": [
+      "Ireland",
+      "Austria",
+      "Portugal"
+    ],
+    "question": "Where would you find the city of Athens?",
+    "tags": [
+      "cities",
+      "europe",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "622a1c357cc59eab6f94ffbc",
+    "correctAnswer": "Athens",
+    "incorrectAnswers": [
+      "Alexandria",
+      "Corinth",
+      "Sparta"
+    ],
+    "question": "What is the capital of Greece?",
+    "tags": [
+      "capital_cities",
+      "europe",
+      "greece",
+      "general_knowledge",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "62602d144b176d54800e3c7d",
+    "correctAnswer": "Seoul",
+    "incorrectAnswers": [
+      "Chittagong",
+      "Ulaanbaatar",
+      "Colombo"
+    ],
+    "question": "Which of these cities is in South Korea?",
+    "tags": [
+      "cities",
+      "asia",
+      "general_knowledge",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "622a1c357cc59eab6f94fe55",
+    "correctAnswer": "South America",
+    "incorrectAnswers": [
+      "Africa",
+      "Europe",
+      "Asia"
+    ],
+    "question": "In which continent would you find the Amazon River?",
+    "tags": [
+      "rivers",
+      "general_knowledge",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "622a1c377cc59eab6f9507e0",
+    "correctAnswer": "Europe",
+    "incorrectAnswers": [
+      "South America",
+      "Oceania",
+      "Asia"
+    ],
+    "question": "The country of Denmark is on which continent?",
+    "tags": [
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "6233856562eaad73716a8c6a",
+    "correctAnswer": "Star",
+    "incorrectAnswers": [
+      "Dragon",
+      "Cross",
+      "Hammer"
+    ],
+    "question": "What is on the flag of Vietnam?",
+    "tags": [
+      "southeast_asia",
+      "symbols",
+      "flags",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "623742d4cb85f7ce9e949df5",
+    "correctAnswer": "United States of America",
+    "incorrectAnswers": [
+      "Australia",
+      "New Zealand",
+      "Ireland"
+    ],
+    "question": "Washington, D.C. is the capital city of which country?",
+    "tags": [
+      "general_knowledge",
+      "capital_cities",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "6237408dcb85f7ce9e949d0a",
+    "correctAnswer": "Athens",
+    "incorrectAnswers": [
+      "Thessaloniki",
+      "Sparta",
+      "Corinth"
+    ],
+    "question": "What is the capital city of Greece?",
+    "tags": [
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  },
+  {
+    "category": "Geography",
+    "id": "62602dfc4b176d54800e3cb9",
+    "correctAnswer": "Bangalore",
+    "incorrectAnswers": [
+      "Christchurch",
+      "Beijing",
+      "Wellington"
+    ],
+    "question": "Which of these cities is in India?",
+    "tags": [
+      "cities",
+      "asia",
+      "india",
+      "geography"
+    ],
+    "type": "Multiple Choice",
+    "difficulty": "easy",
+    "regions": [],
+    "isNiche": false
+  }
+]

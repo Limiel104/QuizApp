@@ -20,12 +20,12 @@ import org.junit.Test
 class GetQuestionsFromDbUseCaseTest {
 
     private lateinit var getQuestionsFromDbUseCase: GetQuestionsFromDbUseCase
-    private lateinit var fakeQuizRepository: FakeQuestionRepository
+    private lateinit var fakeQuestionRepository: FakeQuestionRepository
 
     @Before
     fun setUp() {
-        fakeQuizRepository = FakeQuestionRepository()
-        getQuestionsFromDbUseCase = GetQuestionsFromDbUseCase(fakeQuizRepository)
+        fakeQuestionRepository = FakeQuestionRepository()
+        getQuestionsFromDbUseCase = GetQuestionsFromDbUseCase(fakeQuestionRepository)
 
         val questionsToInsert = mutableListOf<QuestionEntity>()
 
@@ -92,7 +92,7 @@ class GetQuestionsFromDbUseCaseTest {
         questionsToInsert.shuffle()
 
         runBlocking {
-            fakeQuizRepository.insertQuestions(questionsToInsert)
+            fakeQuestionRepository.insertQuestions(questionsToInsert)
         }
     }
 
